@@ -10,6 +10,7 @@
   ],
   "modules-right": [
     "tray",
+    "network",
     "custom/clipboard",
     "custom/screenshot",
     "custom/colorpicker",
@@ -97,6 +98,19 @@
     },
     "tooltip": "true"
   },
+  "network": {
+    // "interface": "wlp2s0", // (Optional) To force the use of this interface
+    "interval": 60,
+    "interface-ethernet": "enp1s*",
+    "interface-wifi": "wlan0",
+    "format-ethernet": "eth ",
+    "format-wifi": "",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "tooltip-format-wifi": "{ifname}: {ipaddr}/{cidr}    |  {essid} ({signalStrength}%)",
+    "format-linked": "(No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "on-click": "sleep 0.15 && rofi-wifi-menu"
+  },
   "battery": {
     "interval": 30,
     "states": {
@@ -129,7 +143,7 @@
     "on-click-right": "hyprshot -m window"
   },
   "custom/power": {
-    "format": "",
+    "format": "",
     "tooltip": false,
     "on-click": "sleep 0.15 && rofi-power-menu"
   },
