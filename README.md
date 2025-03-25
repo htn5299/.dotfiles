@@ -57,20 +57,18 @@ yay -S oh-my-posh
 sudo pacman -S intel-media-driver mesa xf86-video-amdgpu xf86-video-vmware libva-intel-driver vulkan-intel xf86-video-ati xorg-server libva-mesa-driver vulkan-radeon xf86-video-nouveau xorg-xinit
 ```
 
-
 ### hyprland
 
 ```sh
 sudo pacman -S rofi-wayland hyprpicker hyprlock hypridle waybar dunst nautilus okular loupe
 yay -S swww waypaper-git hyprshot
-sudo pacman -S xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
+sudo pacman -Syu xdg-desktop-portal-hyprland xdg-desktop-portal-kde xdg-desktop-portal-gtk qt5-wayland qt6-wayland
 # sudo pacman -S polkit-kde-agent
 sudo pacman -S hyprpolkitagent
 
 sudo pacman -S qt6ct kvantum nwg-look nwg-displays dconf-editor
 # sudo pacman -S gnome-themes-extra gtk-engine-murrine sassc
 sudo pacman -S adw-gtk-theme arc-icon-theme xcursor-vanilla-dmz
-yay -S xcursor-breeze
 ```
 
 - Qt theme [KvLibadwaita](https://github.com/GabePoel/KvLibadwaita)

@@ -1,7 +1,8 @@
 [global]
     monitor = 0
     follow = mouse
-		width = 350
+    width = (300, 500)
+    height = (0, 750)
     origin = bottom-right
     offset = (32,32)
 
@@ -15,7 +16,7 @@
     indicate_hidden = yes
     shrink = no
 		separator_height = 1
-    separator_color = "#B26669"
+    separator_color = "#685555"
     padding = 15
     horizontal_padding = 15
     frame_width = 1
@@ -26,7 +27,7 @@
     font = Ubuntu Nerd Font 10
     line_height = 0
     markup = full
-    format = "<span weight='bold' font='12'>%s</span>\n%b"
+    format = "<span font='11'>%s</span>\n%b"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -57,30 +58,30 @@
 
 [urgency_low]
     background = "#0a0a0a" #bg
-    foreground = "#c7c0ee" #fg
-    highlight = "#c7c0ee" #fg
-    frame_color = "#B26669" #fg-alt
+    foreground = "#c1c1c1" #fg
+    highlight = "#c1c1c1" #fg
+    frame_color = "#685555" #fg-alt
     timeout = 5
 
 [urgency_normal]
     background = "#0a0a0a" #bg
-    foreground = "#c7c0ee" #fg
-    highlight = "#c7c0ee" #fg
-    frame_color = "#B26669" #fg-alt
+    foreground = "#c1c1c1" #fg
+    highlight = "#c1c1c1" #fg
+    frame_color = "#685555" #fg-alt
     timeout = 5
 
 [urgency_critical]
     background = "#0a0a0a" #bg
-    foreground = "#c7c0ee" #fg
+    foreground = "#c1c1c1" #fg
     frame_color = "#ffa0ac"
     timeout = 1000
 
 [volume]
     appname = "Volume"
-    highlight = "#B26669"
+    highlight = "#685555"
 
 [backlight]
     appname = "Backlight"
-    highlight = "#B26669"
+    highlight = "#685555"
 
 # vim: ft=cfg

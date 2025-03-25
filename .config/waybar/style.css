@@ -9,17 +9,41 @@
   border: none;
   min-height: 20px;
   font-weight: 400;
-  font-family:
-    Ubuntu Nerd Font,
-    Cantarell,
-    HackGen,
-    Noto Color Emoji;
+  /* font-family: */
+  /*   Ubuntu Nerd Font, */
+  /*   Cantarell, */
+  /*   HackGen, */
+  /*   Noto Color Emoji; */
   font-size: 12px;
 }
 
-window#waybar {
-  /* background-color: transparent; */
+/* <<--< Main Background >-->> */
+
+window#waybar > box {
   background-color: @bg;
+}
+
+/* <<--< Drop Shadow >-->> */
+
+window#waybar {
+  /* background: @bg-alt; */
+  background: alpha(@bg-alt, 0.7);
+}
+
+/* <<--< Tooltip >-->> */
+
+tooltip {
+  background: @bg;
+  border: solid;
+  border-width: 1px;
+  border-radius: 0px;
+  /* border-color: @bg-alt; */
+  border-color: alpha(@bg-alt, 0.4);
+}
+tooltip label {
+  color: @fg;
+  font-weight: normal;
+  margin: -1.5px 3px;
 }
 
 #clock,
@@ -36,6 +60,7 @@ window#waybar {
 #custom-pacman,
 #custom-power,
 #custom-wifi,
+#custom-spotify,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -63,6 +88,7 @@ window#waybar {
 #custom-pacman:hover,
 #custom-power:hover,
 #custom-wifi:hover,
+#custom-spotify:hover,
 #tray:hover,
 #mode:hover,
 #idle_inhibitor:hover,
@@ -77,6 +103,7 @@ window#waybar {
 
 #workspaces {
   padding: 0;
+  margin-left: 4px;
 }
 
 #workspaces button {
