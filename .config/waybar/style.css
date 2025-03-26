@@ -97,8 +97,8 @@ tooltip label {
 #custom-screenshot:hover,
 #custom-colorpicker:hover,
 #mpd:hover {
-  color: alpha(@fg, 0.7);
-  background-color: alpha(@bg-alt, 0.5);
+  color: alpha(@fg, 1);
+  /* background-color: alpha(@bg-alt, 0.5); */
 }
 
 #workspaces {
