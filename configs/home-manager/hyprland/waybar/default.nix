@@ -1,0 +1,179 @@
+{ config, pkgs, lib, ... }:
+
+{
+  programs.waybar = {
+    enable = true;
+    # systemd.enable = true;
+    settings = [
+      {
+        layer= "top";
+        position = "top";
+        reload_style_on_change = true;
+        modules-left = [
+          "hyprland/workspaces"
+        ];
+        modules-center = [
+          "hyprland/window"
+          "custom/spotify"
+        ];
+        modules-right = [
+          "tray"
+          "custom/clipboard"
+          "custom/screenshot"
+          "custom/colorpicker"
+          "network"
+          "idle_inhibitor"
+          "custom/power"
+          "pulseaudio"
+          "battery"
+          "clock"
+        ];
+        "hyprland/workspaces" = {
+          format = "{name}";
+          format-icons = {
+            default = " ";
+            active = " ";
+            urgent = " ";
+          };
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+        };
+        clock = {
+          format = " {:L%H:%M}";
+          tooltip = true;
+          tooltip-format = "<big>{:%A; %d,%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        "hyprland/window" = {
+          format = "{class}{title}";
+          icon = false;
+          separate-outputs = false;
+          rewrite = {
+            "" = "";
+          };
+        };
+        tray = {
+          icon-size = 12;
+          show-passive-items = true;
+          spacing = 12;
+        };
+        pulseaudio = {
+          format = "{icon} {volume}% {format_source}";
+          format-bluetooth = "{icon} {volume}% {format_source}";
+          format-bluetooth-muted = "{icon} {format_source}";
+          format-muted = "󰝟";
+          format-source = " {volume}%";
+          format-source-muted = "";
+          format-icons = {
+            headphones = [
+              " "
+              " "
+              " "
+            ];
+            handsfree = "󰴸";
+            headset = [
+              " "
+              " "
+              " "
+            ];
+            phone = [
+              " "
+              " "
+              " "
+            ];
+            portable = [
+              " "
+              " "
+              " "
+            ];
+            car = [
+              " "
+              " "
+              " "
+            ];
+            default = [
+              ""
+              ""
+              ""
+            ];
+          };
+          on-click = "pavucontrol";
+        };
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "󰈈";
+            deactivated = "󰈉";
+          };
+          tooltip = "true";
+        };
+        network = {
+          interval = 60;
+          interface-ethernet = "enp1s*";
+          interface-wifi = "wlan0";
+          format-ethernet = "eth ";
+          format-wifi = "󰤨";
+          tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+          tooltip-format-wifi = "󰤨 {essid} ({signalStrength}%) - {ifname}: {ipaddr}/{cidr}";
+          format-linked = "(No IP) ";
+          format-disconnected = "Disconnected ⚠";
+          on-click = "sleep 0.15 && rofi-wifi-menu";
+        };
+        battery = {
+          interval = 30;
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 20;
+          };
+          format = "{icon} {capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰂄  {capacity}%";
+          format-icons = [
+            "󰁻"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰂂"
+            "󰁹"
+          ];
+        };
+        "custom/clipboard" = {
+          format = "󰅍";
+          tooltip = false;
+          on-click = "killall rofi || rofi-clipboard";
+          interval = 86400;
+        };
+        "custom/screenshot" = {
+          format = "";
+          tooltip = false;
+          on-click = "hyprshot -m output";
+          on-click-right = "hyprshot -m window";
+        };
+        "custom/power" = {
+          format = "";
+          tooltip = false;
+          on-click = "killall rofi || rofi-power-menu";
+        };
+        "custom/spotify" = {
+          exec = "/usr/bin/python3 $HOME/.local/bin/mediaplayer.py --player spotify";
+          format = "{}";
+          return-type = "json";
+          on-click = "playerctl play-pause --player spotify";
+          on-scroll-up = "playerctl next";
+          on-scroll-down = "playerctl previous";
+          max-length = 50;
+          escape = true;
+        };
+        "custom/colorpicker" = {
+          format = "";
+          tooltip = false;
+          on-click = "sleep 0.15 && hyprpicker -a";
+          on-click-right = "sleep 0.15 && hyprpicker --format=rgb -a";
+          signal = 1;
+        };
+      }
+    ];
+  }; 
+  home.file.".config/waybar/config.jsonc".source = ./config.jsonc;
+  home.file.".config/waybar/style.css".source = ./style.css;
+}

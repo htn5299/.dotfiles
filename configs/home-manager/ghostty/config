@@ -1,0 +1,32 @@
+palette = 0=#0a0a0a
+palette = 1=#B26669
+palette = 2=#683899
+palette = 3=#6B5CAB
+palette = 4=#8E64A2
+palette = 5=#8D53C9
+palette = 6=#C49EB8
+palette = 7=#c1c1c1
+palette = 8=#685555
+palette = 9=#B26669
+palette = 10=#683899
+palette = 11=#6B5CAB
+palette = 12=#8E64A2
+palette = 13=#8D53C9
+palette = 14=#C49EB8
+palette = 15=#c1c1c1
+background = #0a0a0a
+foreground = #c1c1c1
+cursor-color = #c1c1c1
+selection-background = #B26669
+selection-foreground = #c1c1c1
+
+mouse-hide-while-typing = true
+window-padding-x = 0
+window-padding-y = 0
+
+font-family = "JetBrainsMonoNL Nerd Font"
+adjust-cell-width = -8%
+font-size = 12
+
+window-decoration = false
+keybind = ctrl+shift+space=toggle_window_decorations

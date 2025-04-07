@@ -1,0 +1,148 @@
+@define-color foreground #c1c1c1;
+@define-color background #0a0a0a;
+@define-color cursor #c1c1c1;
+
+@define-color color0 #0a0a0a;
+@define-color color1 #61AFEF;
+@define-color color2 #683899;
+@define-color color3 #6B5CAB;
+@define-color color4 #8E64A2;
+@define-color color5 #8D53C9;
+@define-color color6 #C49EB8;
+@define-color color7 #c1c1c1;
+@define-color color8 #685555;
+@define-color color9 #B26669;
+@define-color color10 #683899;
+@define-color color11 #6B5CAB;
+@define-color color12 #8E64A2;
+@define-color color13 #8D53C9;
+@define-color color14 #C49EB8;
+@define-color color15 #c1c1c1;
+
+@define-color fg @foreground;
+@define-color bg @background;
+@define-color fg-alt @color14;
+@define-color bg-alt @color1;
+
+* {
+  border: none;
+  min-height: 20px;
+  font-weight: 400;
+  font-family: 'Ubuntu Nerd Font';
+  font-size: 12px;
+}
+
+/* <<--< Main Background >-->> */
+
+window#waybar > box {
+  background-color: @bg;
+}
+
+/* <<--< Drop Shadow >-->> */
+
+window#waybar {
+  /* background: @bg-alt; */
+  background: alpha(@bg-alt, 0.7);
+}
+
+/* <<--< Tooltip >-->> */
+
+tooltip {
+  background: @bg;
+  border: solid;
+  border-width: 1px;
+  border-radius: 0px;
+  /* border-color: @bg-alt; */
+  border-color: alpha(@bg-alt, 0.4);
+}
+tooltip label {
+  color: @fg;
+  font-weight: normal;
+  margin: -1.5px 3px;
+}
+
+#clock,
+#battery,
+#window,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-pacman,
+#custom-power,
+#custom-wifi,
+#custom-spotify,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#custom-clipboard,
+#custom-screenshot,
+#custom-colorpicker,
+#mpd {
+  padding: 0px 6px;
+  color: alpha(@fg, 0.7);
+  margin: 0px;
+  border-radius: 0px;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-pacman:hover,
+#custom-power:hover,
+#custom-wifi:hover,
+#custom-spotify:hover,
+#tray:hover,
+#mode:hover,
+#idle_inhibitor:hover,
+#scratchpad:hover,
+#custom-clipboard:hover,
+#custom-screenshot:hover,
+#custom-colorpicker:hover,
+#mpd:hover {
+  color: alpha(@fg, 1);
+  /* background-color: alpha(@bg-alt, 0.5); */
+}
+
+#workspaces {
+  padding: 0;
+  margin-left: 4px;
+}
+
+#workspaces button {
+  /* transition-property: background-color; */
+  /* transition-duration: 0.3s; */
+  /* background: transparent; */
+  /* padding: 0px 6px; */
+  padding: 0 4px;
+  margin: 0px;
+  border-radius: 0px;
+  color: alpha(@fg, 0.7);
+}
+
+#workspaces button:hover {
+  background: alpha(@bg-alt, 0.7);
+}
+
+#workspaces button.urgent {
+  font-weight: bold;
+  color: @bg;
+  background: alpha(@fg, 0.7);
+}
+
+#workspaces button.active {
+  color: @fg;
+  background: alpha(@bg-alt, 0.3);
+}
