@@ -9,7 +9,7 @@
       directory = {
         truncation_length = 15;
         truncation_symbol = "…/";
-        truncate_to_repo = true;
+        truncate_to_repo = false;
       };
       # Nerd Font Symbols
       aws.symbol = "  ";
