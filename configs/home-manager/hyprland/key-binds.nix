@@ -115,7 +115,7 @@ in {
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
-      "$mainMod, O, exec, $fileManager"
+      # "$mainMod, O, exec, $fileManager"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"
       "$shiftMod, W, exec, pkill waybar || waybar &" 

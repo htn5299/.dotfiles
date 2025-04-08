@@ -2,9 +2,17 @@
 {
   wayland.windowManager.hyprland.settings = {
     env = [
-      "GTK_IM_MODULE, fcitx"
-      "QT_IM_MODULE, fcitx"
-      "XMODIFIERS, @im=fcitx"
+      # "GTK_IM_MODULE, fcitx"
+      # "QT_IM_MODULE, fcitx"
+      # "XMODIFIERS, @im=fcitx"
+
+      # hyprland arch config
+      # QT_QPA_PLATFORMTHEME,qt6ct
+      # QT_QPA_PLATFORM,wayland;xcb # Qt should use Wayland first, then X11.
+      # GDK_BACKEND,wayland,x11 # GTK should use Wayland first, then X11.
+      # QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+      # QT_AUTO_SCREEN_SCALE_FACTOR,1
+      # MOZ_ENABLE_WAYLAND,1
     ];
     exec-once = [
       "waybar"
@@ -18,7 +26,6 @@
     ];
     # windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ 
-      # "noblur,class:^()$,title:^()$"
       "suppressevent maximize, class:.*"
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
 
@@ -40,11 +47,15 @@
       "workspace 9, class:^(discord)$"
       "workspace 10, class:^(Spotify)$"
     ];
-    input = {
+    input = { 
+      kb_layout = "us";
       repeat_delay = 300;
       repeat_rate = 30;
       follow_mouse = 1;
-      sensitivity = lib.mkDefault (0); # -1.0 - 1.0, 0 means no modification.
+      sensitivity = lib.mkDefault (0); # -1.0 - 1.0, 0 means no modification. 
+      touchpad = {
+        natural_scroll = false;
+      };
     };
     device = {
       name = "razer-razer-deathadder-essential";
@@ -56,7 +67,7 @@
       border_size = 1;
       "col.active_border" = "0xff61afef";
       "col.inactive_border" = "0xff1e2127";
-      resize_on_border = true;
+      resize_on_border = false;
     };
     decoration = {
       rounding = 0; 
@@ -70,7 +81,6 @@
       };
     };
     animations = {
-      # bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
       bezier = [ 
         "easeOutQuint,0.23,1,0.32,1"
         "easeInOutCubic,0.65,0.05,0.36,1"
@@ -80,11 +90,7 @@
       ];
 
       animation = [
-        # "windows, 1, 4, myBezier, slide"
-        # "layers, 1, 4, myBezier, fade"
-        # "border, 1, 5, default"
-        # "fade, 1, 5, default"
-        # "workspaces, 1, 6, default"
+        "workspaces, 1, 9, default"
         "global, 1, 10, default"
         "border, 1, 5.39, easeOutQuint"
         "windows, 1, 4.79, easeOutQuint"
@@ -111,7 +117,7 @@
       disable_hyprland_logo = true;
     };
     master = {
-      new_status = "master";
+      new_status = "slave";
     };
   };
 }

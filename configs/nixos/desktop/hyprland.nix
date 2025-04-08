@@ -15,7 +15,7 @@
     ];
   };
 
-  # services.xremap.withWlroots = true; # for xremap to work with wlroots
+  services.xremap.withWlroots = true; # for xremap to work with wlroots
   # security.pam.services.swaylock.text = "auth include login";
-    security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = {};
 }

@@ -17,7 +17,8 @@
       ../../configs/nixos/apps/keyring.nix
       ../../configs/nixos/apps/opentablet.nix
       ../../configs/nixos/apps/openrazer.nix
-      ../../configs/nixos/apps/steam.nix
+      ../../configs/nixos/apps/steam.nix 
+      ../../configs/nixos/apps/xremap.nix
 
       ../../configs/nixos/desktop/fonts.nix 
       ../../configs/nixos/desktop/hyprland.nix
@@ -77,15 +78,21 @@
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true; 
-  services.greetd = {
+  # services.xserver.displayManager.sddm.enable = true; 
+  # services.xserver.displayManager.sddm.wayland.enable = true;
+  services.displayManager = {
     enable = true;
-    settings = {
-      default_session = {
-        command = "${lib.getExe pkgs.greetd.tuigreet} --cmd ${lib.getExe config.programs.hyprland.package}";
-        user = "htn";
-      };
-    };
+    ly.enable = true;
   };
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${lib.getExe pkgs.greetd.tuigreet} --cmd ${lib.getExe config.programs.hyprland.package}";
+  #       user = "htn";
+  #     };
+  #   };
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb = {
