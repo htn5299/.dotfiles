@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ lib, config, ... }:
+let
+  colors = config.colorScheme.colors;
+in
 {
   wayland.windowManager.hyprland.settings = {
     env = [
@@ -19,13 +22,13 @@
       "swww init"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
-      "hyprctl dispatch workspace 1" 
-      "fcitx5 -D" 
+      "hyprctl dispatch workspace 1"
+      "fcitx5 -D"
       # "discord --start-minimized"
       # "steam -silent"
     ];
     # windowrule = [ "pseudo, noblur, class:(fcitx)" ];
-    windowrulev2 = [ 
+    windowrulev2 = [
       "suppressevent maximize, class:.*"
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
 
@@ -47,12 +50,12 @@
       "workspace 9, class:^(discord)$"
       "workspace 10, class:^(Spotify)$"
     ];
-    input = { 
+    input = {
       kb_layout = "us";
       repeat_delay = 300;
       repeat_rate = 30;
       follow_mouse = 1;
-      sensitivity = lib.mkDefault (0); # -1.0 - 1.0, 0 means no modification. 
+      sensitivity = lib.mkDefault (0); # -1.0 - 1.0, 0 means no modification.
       touchpad = {
         natural_scroll = false;
       };
@@ -65,12 +68,12 @@
       gaps_in = 2;
       gaps_out = 4;
       border_size = 1;
-      "col.active_border" = "0xff61afef";
-      "col.inactive_border" = "0xff1e2127";
+      "col.active_border" = "0xff${colors.base08}";
+      "col.inactive_border" = "0xff${colors.base00}";
       resize_on_border = false;
     };
     decoration = {
-      rounding = 0; 
+      rounding = 0;
       blur = {
         enabled = true;
         size = 3;
@@ -81,7 +84,7 @@
       };
     };
     animations = {
-      bezier = [ 
+      bezier = [
         "easeOutQuint,0.23,1,0.32,1"
         "easeInOutCubic,0.65,0.05,0.36,1"
         "linear,0,0,1,1"

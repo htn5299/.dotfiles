@@ -13,17 +13,17 @@
   wayland.windowManager.hyprland.enable = true;
 
   home.packages = with pkgs; [
-      hyprshot # screenshot
-      hyprpicker # color picker
-      hypridle
-      hyprlock
-      pavucontrol
-      pamixer
-      brightnessctl # screen brightness
-      playerctl # media player control
-      swww # wallpaper
-      waypaper
-      cliphist
-      wl-clipboard # clipboard manager
-    ];
+    hyprshot # screenshot
+    hyprpicker # color picker
+    hypridle
+    hyprlock
+    pavucontrol
+    pamixer
+    brightnessctl # screen brightness
+    playerctl # media player control
+    swww # wallpaper
+    waypaper
+    cliphist
+    wl-clipboard # clipboard manager
+  ];
 }

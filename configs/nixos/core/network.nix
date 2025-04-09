@@ -1,7 +1,6 @@
-{ hostname, ... }:
 {
   networking = {
-    hostName = hostname;
+    hostName = "nixos";
     networkmanager.enable = true;
     firewall = {
       enable = true;
