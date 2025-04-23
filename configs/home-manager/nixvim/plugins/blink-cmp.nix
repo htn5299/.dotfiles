@@ -1,7 +1,7 @@
 {
   programs.nixvim.plugins.blink-cmp = {
     enable = true;
-    # Không còn cần friendly-snippets
+    # No need friendly-snippets
     settings = {
       keymap.preset = "super-tab";
       completion = {
@@ -24,6 +24,7 @@
       cmdline = {
         enabled = true;
         completion.menu.auto_show = true;
+        keymap.preset = "inherit";
       };
       appearance = {
         use_nvim_cmp_as_default = true;

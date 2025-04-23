@@ -17,7 +17,6 @@
           };
         }
 
-        # for 65% layout keyboard
         {
           name = "alt_r to left";
           remap = {
@@ -52,18 +51,6 @@
         #   exact_match = true;
         #   remap = {
         #     C-h = "Backspace";
-        #   };
-        # }
-        # {
-        #   name = "Ctrl-Esc > `";
-        #   remap = {
-        #     C-Esc = "`";
-        #   };
-        # }
-        # {
-        #   name = "Shift-Esc > ~";
-        #   remap = {
-        #     Shift-Esc = "~";
         #   };
         # }
       ];

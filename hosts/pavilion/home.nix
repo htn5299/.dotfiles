@@ -11,7 +11,7 @@
 
   imports = [
     ../../configs/home-manager/ghostty
-    ../../configs/home-manager/udiskie
+    ../../configs/home-manager/yazi
     ../../configs/home-manager/kitty
     ../../configs/home-manager/cli-utilities
     ../../configs/home-manager/git
@@ -28,28 +28,24 @@
     inputs.nixvim.homeManagerModules.nixvim
     inputs.nix-colors.homeManagerModules.default
   ];
-
   colorScheme = {
-    slug = "pasque";
-    name = "Pasque";
-    author = "Gabriel Fontes (https://github.com/Misterio77)";
     palette = {
-      base00 = "#0a0a0a";
-      base01 = "#B26669";
-      base02 = "#683899";
-      base03 = "#6B5CAB";
-      base04 = "#8E64A2";
-      base05 = "#8D53C9";
-      base06 = "#C49EB8";
-      base07 = "#C1C1C1";
-      base08 = "#685555";
-      base09 = "#B26669";
-      base0A = "#683899";
-      base0B = "#6B5CAB";
-      base0C = "#8E64A2";
-      base0D = "#8D53C9";
-      base0E = "#C49EB8";
-      base0F = "#C1C1C1";
+      base00 = "#101010";
+      base01 = "#1F1F28";
+      base02 = "#2A2A37";
+      base03 = "#54546d";
+      base04 = "#727169";
+      base05 = "#dcd7ba";
+      base06 = "#c8c093";
+      base07 = "#717c7c";
+      base08 = "#c34043";
+      base09 = "#ffa066";
+      base0A = "#c0a36e";
+      base0B = "#76946a";
+      base0C = "#6a9589";
+      base0D = "#7e9cd8";
+      base0E = "#957fb8";
+      base0F = "#938AA9"; # accent
     };
   };
 
@@ -62,6 +58,11 @@
     loupe
     libsForQt5.okular
     calibre
+    telegram-desktop
+    bitwarden-desktop
+    dropbox
+    rnote
+    onlyoffice-bin
   ];
 
   programs = {

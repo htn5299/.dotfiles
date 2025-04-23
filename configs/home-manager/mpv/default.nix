@@ -32,9 +32,13 @@
       in
       {
         keep-open = "yes";
-        autofit = "70%";
+        autofit = "75%";
         volume = 80;
         volume-max = 100;
+
+        # hwdec = "auto";
+        # vo = "gpu";
+
         alang = "jpn,jp,eng,en,enUS,en-US,de,ger";
         slang = "eng,en,und,de,ger,jp,jap";
         screenshot-format = "png";
@@ -52,33 +56,35 @@
         osd-font-size = 24;
 
         # ytdl
-
-        ytdl-format = ''bestvideo[height<=?1080]+bestaudio/best'';
+        # ytdl-format = ''bestvideo[height<=?1080]+bestaudio/best'';
+        # ytdl-raw-options = ''cookies-from-browser="firefox",write-sub=,write-auto-sub=,sub-langs="ja,jp,jpn,en.*"'';
+        ytdl-format = ''bestvideo[vcodec^=avc1][height=1080]+bestaudio/best[vcodec^=avc1][height=1080]/bestvideo[vcodec^=avc1][height=720]+bestaudio/best[vcodec^=avc1][height=720]/best'';
+        # ytdl-raw-options = ''write-sub=,write-auto-sub=,sub-langs="ja,jp,jpn,en.*",cookies-from-browser="firefox"'';
         ytdl-raw-options = ''write-sub=,write-auto-sub=,sub-langs="ja,jp,jpn,en.*"'';
 
         #
         # Show subs, guess on what subs, prioritize japanese, try to fix timings, make subs a bit bigger
-        audio-file-auto = "fuzzy";
-        autofit-larger = "100%x100%";
-        geometry = "50%:50%";
+        audio-file-auto = ''fuzzy'';
+        autofit-larger = ''100%x100%'';
+        geometry = ''50%:50%'';
 
         # Sub appearance
         inherit sub-font;
-        sub-auto = "all";
-        sub-visibility = "yes";
-        sub-color = "#f7f7f7";
-        sub-shadow-color = "#16161D";
-        sub-bold = "yes";
+        sub-auto = ''all'';
+        sub-visibility = ''yes'';
+        sub-color = ''#f7f7f7'';
+        sub-shadow-color = ''#16161D'';
+        sub-bold = ''yes'';
         sub-font-size = 56;
         sub-pos = 90;
-        sub-back-color = "0.0/0.0/0.0/0.5";
-        sub-border-style = "background-box";
+        sub-back-color = ''0.0/0.0/0.0/0.5'';
+        sub-border-style = ''background-box'';
         sub-border-size = 0;
         sub-shadow-offset = 7;
-        sub-fix-timing = "yes";
-        sub-scale-by-window = "no";
-        sub-ass-scale-with-window = "no";
-        sub-ass-override = "scale";
+        sub-fix-timing = ''yes'';
+        sub-scale-by-window = ''no'';
+        sub-ass-scale-with-window = ''no'';
+        sub-ass-override = ''scale'';
       };
   };
 }

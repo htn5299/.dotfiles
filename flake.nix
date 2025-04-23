@@ -1,28 +1,34 @@
 {
   description = "NixOS configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
-    xremap.url = "github:xremap/nix-flake";
+    nix-colors.url = "github:misterio77/nix-colors";
+    yt-x.url = "github:Benexl/yt-x";
 
-    # Inner deps
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    # xremap.inputs.flake-parts.follows = "flake-parts";
-    xremap.inputs.home-manager.follows = "home-manager";
-    xremap.inputs.hyprland.follows = "hyprland";
-    xremap.inputs.nixpkgs.follows = "nixpkgs";
-    # xremap.inputs.treefmt-nix.follows = "treefmt-nix";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    xremap = {
+      url = "github:xremap/nix-flake";
+      inputs = {
+        home-manager.follows = "home-manager";
+        hyprland.follows = "hyprland";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

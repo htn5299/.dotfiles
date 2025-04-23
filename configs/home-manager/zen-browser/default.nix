@@ -1,7 +1,7 @@
-{pkgs, inputs, ...} : 
+{ pkgs, inputs, ... }:
 
 {
   home.packages = with pkgs; [
-    inputs.zen-browser.packages."${system}".twilight-official
+    inputs.zen-browser.packages."${system}".default
   ];
 }

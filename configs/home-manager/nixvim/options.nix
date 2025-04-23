@@ -1,15 +1,26 @@
 {
-  programs.nixvim  = {
+  programs.nixvim = {
     clipboard = {
       register = "unnamedplus";
       providers.wl-copy.enable = true;
     };
 
+    extraConfigLua = ''
+      -- Custom statusline configuration
+      vim.opt.statusline = [[%f %m %r %h %w %=%y %l,%c %p%%]]
+
+      -- Or a more advanced one with functions
+      -- function MyStatusline()
+      --   -- Your custom statusline code here
+      -- end
+      -- vim.o.statusline = '%!v:lua.MyStatusline()'
+    '';
+
     opts =
       let
         indentSize = 2;
       in
-        {
+      {
         splitright = true;
         splitbelow = true;
 
@@ -41,7 +52,7 @@
         };
 
         foldcolumn = "1";
-        foldenable = true;
+        foldenable = false;
         foldlevel = 99;
         foldlevelstart = 99;
         ignorecase = true;

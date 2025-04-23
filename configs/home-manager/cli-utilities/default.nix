@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     # Coreutils replacements
@@ -42,5 +42,8 @@
     # Rice
     fastfetch
     neofetch
+
+    yt-dlp
+    inputs.yt-x.packages."${system}".default
   ];
 }

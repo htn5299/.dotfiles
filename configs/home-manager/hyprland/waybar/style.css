@@ -2,8 +2,9 @@
 
 @define-color fg @foreground;
 @define-color bg @background;
-@define-color fg-alt @color14;
-@define-color bg-alt @color1;
+/* @define-color bg #101010; */
+@define-color fg-alt @color15;
+@define-color bg-alt @color2;
 
 * {
   border: none;
@@ -23,7 +24,7 @@ window#waybar > box {
 
 window#waybar {
   /* background: @bg-alt; */
-  background: alpha(@bg-alt, 0.7);
+  background: @bg-alt;
 }
 
 /* <<--< Tooltip >-->> */
@@ -34,7 +35,7 @@ tooltip {
   border-width: 1px;
   border-radius: 0px;
   /* border-color: @bg-alt; */
-  border-color: alpha(@bg-alt, 0.4);
+  border-color: @bg-alt;
 }
 tooltip label {
   color: @fg;
@@ -58,15 +59,17 @@ tooltip label {
 #custom-wifi,
 #custom-spotify,
 #tray,
+#bluetooth,
 #mode,
 #idle_inhibitor,
 #scratchpad,
 #custom-clipboard,
 #custom-screenshot,
 #custom-colorpicker,
+#custom-notification,
 #mpd {
   padding: 0px 6px;
-  color: alpha(@fg, 0.7);
+  color: @fg;
   margin: 0px;
   border-radius: 0px;
 }
@@ -86,20 +89,27 @@ tooltip label {
 #custom-wifi:hover,
 #custom-spotify:hover,
 #tray:hover,
+#bluetooth:hover,
 #mode:hover,
 #idle_inhibitor:hover,
 #scratchpad:hover,
 #custom-clipboard:hover,
 #custom-screenshot:hover,
 #custom-colorpicker:hover,
+#custom-notification:hover,
 #mpd:hover {
-  color: alpha(@fg, 1);
-  /* background-color: alpha(@bg-alt, 0.5); */
+  color: @fg-alt;
 }
 
 #workspaces {
   padding: 0;
-  margin-left: 4px;
+  /* margin-left: 4px; */
+  /* margin-top: 4px; */
+}
+
+#clock {
+  /* margin-left: 4px; */
+  /* margin-bottom: 4px; */
 }
 
 #workspaces button {
@@ -110,20 +120,22 @@ tooltip label {
   padding: 0 4px;
   margin: 0px;
   border-radius: 0px;
-  color: alpha(@fg, 0.7);
+  color: @fg;
 }
 
 #workspaces button:hover {
-  background: alpha(@bg-alt, 0.7);
+  background: @fg;
+  color: @bg;
 }
 
 #workspaces button.urgent {
   font-weight: bold;
+  background: @fg;
   color: @bg;
-  background: alpha(@fg, 0.7);
 }
 
 #workspaces button.active {
-  color: @fg;
-  background: alpha(@bg-alt, 0.3);
+  background: @fg-alt;
+  color: @bg;
 }
+

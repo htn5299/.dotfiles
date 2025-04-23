@@ -6,6 +6,7 @@
   security = {
     polkit.enable = true;
     pam.services.login.enableGnomeKeyring = true;
+    pam.services.greetd.enableGnomeKeyring = true;
   };
   # systemd = {
   # user.services.polkit-gnome-authentication-agent-1 = {

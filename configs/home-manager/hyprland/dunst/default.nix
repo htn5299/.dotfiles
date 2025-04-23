@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
 in
 {
   services.dunst = {
@@ -25,10 +25,10 @@ in
         shrink = "no";
 
         separator_height = 1;
-        separator_color = ''#${colors.base08}'';
+        separator_color = ''#${colors.base0F}'';
         padding = 15;
         horizontal_padding = 15;
-        frame_width = 1;
+        frame_width = 0;
         corner_radius = 0;
         sort = "yes";
         idle_threshold = 120;
@@ -68,36 +68,36 @@ in
       };
 
       urgency_low = {
-        background = ''#${colors.base00}'';
-        foreground = ''#${colors.base0F}'';
-        highlight = ''#${colors.base00}'';
-        frame_color = ''#${colors.base08}'';
+        background = ''#${colors.base01}'';
+        foreground = ''#${colors.base05}'';
+        highlight = ''#${colors.base06}'';
+        frame_color = ''#${colors.base06}'';
         timeout = 5;
       };
 
       urgency_normal = {
-        background = ''#${colors.base00}'';
-        foreground = ''#${colors.base0F}'';
-        highlight = ''#${colors.base00}'';
-        frame_color = ''#${colors.base08}'';
+        background = ''#${colors.base01}'';
+        foreground = ''#${colors.base05}'';
+        highlight = ''#${colors.base06}'';
+        frame_color = ''#${colors.base0F}'';
         timeout = 5;
       };
 
       urgency_critical = {
-        background = ''#${colors.base00}'';
-        foreground = ''#${colors.base0F}'';
-        frame_color = "#ffa0ac";
+        background = ''#${colors.base01}'';
+        foreground = ''#${colors.base05}'';
+        frame_color = ''#${colors.base08}'';
         timeout = 1000;
       };
 
       volume = {
         appname = "Volume";
-        highlight = ''#${colors.base08}'';
+        highlight = ''#${colors.base0F}'';
       };
 
       backlight = {
         appname = "Backlight";
-        highlight = ''#${colors.base08}'';
+        highlight = ''#${colors.base0F}'';
       };
     };
   };

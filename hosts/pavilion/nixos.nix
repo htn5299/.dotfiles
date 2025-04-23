@@ -25,6 +25,7 @@
     ../../configs/nixos/apps/postgresql.nix
 
     ../../configs/nixos/desktop/fonts.nix
+    ../../configs/nixos/desktop/fcitx5.nix
     ../../configs/nixos/desktop/hyprland.nix
   ];
 
@@ -33,18 +34,20 @@
   # boot.loader.efi.canTouchEfiVariables = true;
   boot = {
     loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = false;
+
       grub = {
         enable = true;
-        devices = [ "nodev" ];
         efiSupport = true;
-        # useOSProber = true;
+        device = "nodev";
+        useOSProber = true;
       };
     };
-    # kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    # kernelParams = [
+    #   "nvidia-drm.modeset=1" # Enables kernel modesetting for the proprietary NVIDIA driver.
+    #   "nouveau.modeset=0" # Disables modesetting for the open-source Nouveau driver, preventing conflicts with proprietary NVIDIA drivers.
+    # ];
   };
 
   # Set your time zone.
@@ -69,10 +72,31 @@
   services.xserver.enable = true;
 
   # Enable the Ly Desktop Environment.
-  services.displayManager = {
-    enable = true;
-    ly.enable = true;
-  };
+  # services.displayManager = {
+  #   enable = true;
+  #   ly.enable = true;
+  # };
+
+  # gdm
+  services.xserver.displayManager.gdm.enable = true;
+
+  # sddm
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+
+  # Configure Greetd for managing the display manager
+  # services.greetd = {
+  #   enable = true; # Enables the greetd display manager service
+  #   settings = {
+  #     # This block defines the default session settings for greetd.
+  #     default_session = {
+  #       # This line specifies the command that greetd will run.
+  #       # Tells greetd to launch tuigreet, a visually appealing login screen with customizable themes and colors, ...
+  #       # display current time (--time) and start Hyprland when a user logs in (--cmd Hyprland).
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #     };
+  #   };
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -112,6 +136,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
+      "input"
     ];
     packages = with pkgs; [
       #  thunderbird
@@ -126,23 +152,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11";
-
-  services.udisks2.enable = true;
-
-  environment.sessionVariables = rec {
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_STATE_HOME = "$HOME/.local/state";
-    XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots";
-    HYPRSHOT_DIR = "$HOME/Pictures/Screenshots";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
-    # QT_STYLE_OVERRIDE = "kvantum";
-
-    # Not officially in the specification
-    XDG_BIN_HOME = "$HOME/.local/bin";
-    PATH = [
-      "${XDG_BIN_HOME}"
-    ];
-  };
 }

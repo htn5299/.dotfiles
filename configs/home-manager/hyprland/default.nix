@@ -11,6 +11,18 @@
   ];
 
   wayland.windowManager.hyprland.enable = true;
+  # wayland.windowManager.hyprland.plugins = [
+  #   # ... whatever
+  #   inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+  # ];
+  wayland.windowManager.hyprland = {
+    plugins = [
+      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      # (inputs.hyprspace.packages.${pkgs.system}.Hyprspace.overrideAttrs {
+      #   dontUseCmakeConfigure = true;
+      # })
+    ];
+  };
 
   home.packages = with pkgs; [
     hyprshot # screenshot

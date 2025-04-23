@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   networking = {
     hostName = "nixos";
@@ -20,4 +21,8 @@
 
   # nixpkgs issue#180175
   systemd.services.NetworkManager-wait-online.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+  ];
 }

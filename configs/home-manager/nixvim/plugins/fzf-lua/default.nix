@@ -4,27 +4,8 @@
     fzf-lua = {
       enable = true;
       settings = {
-        "default-prompt" = true;
+        default_prompt = true;
         fzf_colors = {
-          fg = [
-            "fg"
-            "CursorLine"
-          ];
-          "fg+" = [
-            "fg"
-            "PmenuSel"
-          ];
-          bg = [
-            "bg"
-            "Normal"
-          ];
-          "bg+" = [
-            "bg"
-            [
-              "PmenuSel"
-              "Normal"
-            ]
-          ];
           gutter = "-1";
         };
         keymap = {
@@ -49,7 +30,6 @@
           };
         };
         files = {
-          cwd_prompt = false;
           prompt = "Files❯ ";
           actions = {
             "alt-i" = {

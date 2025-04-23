@@ -4,54 +4,58 @@ let
     pkgs.writeScriptBin "volume"
       # bash
       ''
-case $1 in
-up)
-  # Set the volume on (if it was muted)
-  wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-  wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+
-  ;;
-down)
-  wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-  wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%-
-  ;;
-mute)
-  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  ;;
-esac
+        case $1 in
+        up)
+          # Set the volume on (if it was muted)
+          wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+          wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+
+          ;;
+        down)
+          wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+          wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%-
+          ;;
+        mute)
+          wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+          ;;
+        esac
 
-VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | tr -dc '0-9' | sed 's/^0\{1,2\}//')
+        VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | tr -dc '0-9' | sed 's/^0\{1,2\}//')
 
-send_notification() {
-  if [ "$1" = "mute" ]; then ICON="mute"; elif [ "$VOLUME" -lt 33 ]; then ICON="low"; elif [ "$VOLUME" -lt 66 ]; then ICON="medium"; else ICON="high"; fi
-  if [ "$1" = "mute" ]; then TEXT="Currently muted"; else TEXT="Currently at $VOLUME%"; fi
+        send_notification() {
+          if [ "$1" = "mute" ]; then ICON="mute"; elif [ "$VOLUME" -lt 33 ]; then ICON="low"; elif [ "$VOLUME" -lt 66 ]; then ICON="medium"; else ICON="high"; fi
+          if [ "$1" = "mute" ]; then TEXT="Currently muted"; else TEXT="Currently at $VOLUME%"; fi
 
-  dunstify -a "Volume" -r 9993 -h int:value:"$VOLUME" -i "volume-$ICON" "Volume" "$TEXT" -t 2000
-}
+          dunstify -a "Volume" -r 9993 -h int:value:"$VOLUME" -i "volume-$ICON" "Volume" "$TEXT" -t 2000
+        }
 
-case $1 in
-mute)
-  case "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" in
-  *MUTED*) send_notification mute ;;
-  *) send_notification ;;
-  esac
-  ;;
-*)
-  send_notification
-  ;;
-esac
+        case $1 in
+        mute)
+          case "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" in
+          *MUTED*) send_notification mute ;;
+          *) send_notification ;;
+          esac
+          ;;
+        *)
+          send_notification
+          ;;
+        esac
       '';
   backlight =
     pkgs.writeScriptBin "backlight"
       # bash
       ''
+        #!/bin/sh
+
+        # Use brightnessctl to naturally adjust laptop screen brightness and send a notification
+
         currentbrightness=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
         if [ "$currentbrightness" -lt 30 ] && [ "$1" = "down" ]; then exit 1; fi
-        
+
         send_notification() {
-        	brightness=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
-        	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$brightness" -i "brightness" "Brightness" "Currently at $brightness%" -t 1000
+        	BRIGHTNESS=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
+        	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$BRIGHTNESS" -i "brightness" "Brightness" "Currently at $brightness%" -t 1000
         }
-        
+
         case $1 in
         	up)
         		brightnessctl -e4 set 5%+
@@ -77,22 +81,22 @@ esac
         lang_pc_reboot="  Reboot"
         lang_pc_logout="  Logout"
         lang_pc_lock="  Lock"
-        
+
         selected=$(
           printf "%s\n%s\n%s\n%s\n" \
             "$lang_pc_lock" "$lang_pc_logout" "$lang_pc_reboot" "$lang_pc_shutdown" |
             rofi -dmenu -i -p "Power Menu" -lines 4
         )
-        
+
         case $selected in
         "$lang_pc_shutdown")
           systemctl poweroff
           ;;
-        
+
         "$lang_pc_reboot")
           systemctl reboot
           ;;
-        
+
         "$lang_pc_logout")
           hyprctl dispatch exit
           ;;
@@ -101,7 +105,8 @@ esac
           ;;
         esac
       '';
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     # "$mainMod" = "SUPER";
     # "$subMod" = "ALT";
@@ -112,35 +117,43 @@ in {
     "$menu" = "rofi -show-icons";
     "$mainMod" = "SUPER";
     "$shiftMod" = "SUPER SHIFT";
+    "$subMod" = "ALT";
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
-      # "$mainMod, O, exec, $fileManager"
+      "$mainMod, O, exec, ghostty -e yazi"
+      "$mainMod, Y, exec, ghostty -e yt-x --preview"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"
-      "$shiftMod, W, exec, pkill waybar || waybar &" 
+      "$shiftMod, W, exec, pkill waybar || waybar &"
 
+      "$subMod, Tab, cyclenext"
+      "$subMod SHIFT, Tab, cyclenext, prev"
 
       # screenshot
       ", PRINT, exec, hyprshot -m output"
       "$mainMod, PRINT, exec, hyprshot -m window"
-      "$shiftMod, PRINT, exec, hyprshot -m region" 
+      "$shiftMod, PRINT, exec, hyprshot -m region"
 
       # color picker
       "$mainMod, I, exec, hyprpicker -a"
-      "$shiftMod, I, exec, hyprpicker --format=rgb -a" 
+      "$shiftMod, I, exec, hyprpicker --format=rgb -a"
+
+      # nofi
+      "$mainMod, U, exec, dunstctl history-pop"
+      "$shiftMod, U, exec, dunstctl close-all"
 
       # rofi
       "$shiftMod, L, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
       "$shiftMod, H, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
       "$mainMod, F, exec, $killMenu || $menu -show drun"
-      "$mainMod, R, exec, $killMenu || $menu -show window" 
+      "$mainMod, R, exec, $killMenu || $menu -show window"
 
       # Move focus with mainMod + arrow keys
       "$mainMod, H, movefocus, l"
       "$mainMod, L, movefocus, r"
       "$mainMod, K, movefocus, u"
-      "$mainMod, J, movefocus, d" 
+      "$mainMod, J, movefocus, d"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
@@ -152,7 +165,7 @@ in {
       "$mainMod, 7, workspace, 7"
       "$mainMod, 8, workspace, 8"
       "$mainMod, 9, workspace, 9"
-      "$mainMod, 0, workspace, 10" 
+      "$mainMod, 0, workspace, 10"
 
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
       "$shiftMod, 1, movetoworkspace, 1"
@@ -164,7 +177,7 @@ in {
       "$shiftMod, 7, movetoworkspace, 7"
       "$shiftMod, 8, movetoworkspace, 8"
       "$shiftMod, 9, movetoworkspace, 9"
-      "$shiftMod, 0, movetoworkspace, 10" 
+      "$shiftMod, 0, movetoworkspace, 10"
 
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
@@ -182,7 +195,7 @@ in {
       "$mainMod, mouse:272, movewindow"
       "$mainMod, mouse:273, resizewindow"
     ];
-    bindl = [ 
+    bindl = [
       # media control
       ", XF86AudioPlay, exec, playerctl play-pause"
       ", XF86AudioPrev, exec, playerctl previous"

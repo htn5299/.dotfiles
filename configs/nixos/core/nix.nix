@@ -34,5 +34,27 @@
     };
   };
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  environment.sessionVariables = rec {
+    NIXOS_OZONE_WL = "1";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots";
+    HYPRSHOT_DIR = "$HOME/Pictures/Screenshots";
+    # QT_QPA_PLATFORMTHEME = "qt5ct";
+    # QT_STYLE_OVERRIDE = "kvantum";
+
+    # Not officially in the specification
+    XDG_BIN_HOME = "$HOME/.local/bin";
+    PATH = [
+      "${XDG_BIN_HOME}"
+    ];
+  };
+
   nixpkgs.config.allowUnfree = true;
 }

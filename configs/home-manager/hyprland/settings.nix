@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
 in
 {
   wayland.windowManager.hyprland.settings = {
@@ -19,56 +19,66 @@ in
     ];
     exec-once = [
       "waybar"
+      "nm-applet --indicator"
       "swww init"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
       "hyprctl dispatch workspace 1"
-      "fcitx5 -D"
+      # "fcitx5 -D"
+      "fcitx5 -d -r"
+      "fcitx5-remote -r"
       # "discord --start-minimized"
       # "steam -silent"
     ];
-    # windowrule = [ "pseudo, noblur, class:(fcitx)" ];
+    windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [
       "suppressevent maximize, class:.*"
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      "noborder, onworkspace:w[t1]"
 
-      "float,class:^(org.pulseaudio.pavucontrol)$"
-      "float,class:^(blueman-manager)$"
-      "float,class:^(nm-applet)$"
-      "float,class:^(waypaper)$"
-      "float,class:^(zenity)$"
-      "float,class:^(kvantummanager)$"
-      "float,class:^(nwg-look)$"
-      "float,class:^(nwg-displays)$"
-      "float,class:^(qt6ct)$"
-      "float,class:^(qt5ct)$"
-      "float,class:^(mpv)$"
-      "float,class:^(org.kde.gwenview)$"
-      "float,class:^(org.gnome.Loupe)$"
+      # "float,class:^(org.pulseaudio.pavucontrol)$"
+      # "float,class:^(blueman-manager)$"
+      # "float,class:^(nm-applet)$"
+      # "float,class:^(waypaper)$"
+      # "float,class:^(zenity)$"
+      # "float,class:^(kvantummanager)$"
+      # "float,class:^(nwg-look)$"
+      # "float,class:^(nwg-displays)$"
+      # "float,class:^(qt6ct)$"
+      # "float,class:^(qt5ct)$"
+      # "float,class:^(mpv)$"
+      # "float,class:^(org.kde.gwenview)$"
+      # "float,class:^(org.gnome.Loupe)$"
+      # "float,class:^(.blueman-manager-wrapped)$"
 
-      "workspace 2, class:^(zen.*)$"
+      # "workspace 2, class:^(zen.*)$"
+      "workspace 8, class:^(mpv)$"
       "workspace 9, class:^(discord)$"
-      "workspace 10, class:^(Spotify)$"
+      "workspace 10, class:^(spotify)$"
+
     ];
     input = {
       kb_layout = "us";
       repeat_delay = 300;
       repeat_rate = 30;
+      accel_profile = "flat"; # flat, adaptive
+      force_no_accel = true; # Force no mouse acceleration
       follow_mouse = 1;
       sensitivity = lib.mkDefault (0); # -1.0 - 1.0, 0 means no modification.
-      touchpad = {
-        natural_scroll = false;
-      };
+      # touchpad = {
+      #   natural_scroll = false;
+      # };
     };
-    device = {
-      name = "razer-razer-deathadder-essential";
-      accel_profile = "flat";
-    };
+    # device = {
+    #   name = "razer-razer-deathadder-essential";
+    #   accel_profile = "flat";
+    # };
+
     general = {
-      gaps_in = 2;
-      gaps_out = 4;
+      gaps_in = 0;
+      gaps_out = 0;
       border_size = 1;
-      "col.active_border" = "0xff${colors.base08}";
+      "col.active_border" = "0xff${colors.base0F}";
       "col.inactive_border" = "0xff${colors.base00}";
       resize_on_border = false;
     };

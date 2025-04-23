@@ -5,7 +5,7 @@
   ...
 }:
 let
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
 in
 {
   programs.waybar = {
@@ -15,24 +15,28 @@ in
       {
         layer = "top";
         position = "top";
+        # width = 20;
+        # spacing = 0;
+        # fixed-center = false;
         reload_style_on_change = true;
         modules-left = [
           "hyprland/workspaces"
         ];
         modules-center = [
           "hyprland/window"
-          "custom/spotify"
+          # "custom/spotify"
         ];
         modules-right = [
           "tray"
-          "custom/clipboard"
-          "custom/screenshot"
+          # "network"
           "custom/colorpicker"
-          "network"
+          # "custom/clipboard"
+          "custom/screenshot"
           "idle_inhibitor"
-          "custom/power"
-          "pulseaudio"
+          # "custom/power"
           "battery"
+          "pulseaudio"
+          # "custom/notification"
           "clock"
         ];
         "hyprland/workspaces" = {
@@ -46,14 +50,33 @@ in
           on-scroll-down = "hyprctl dispatch workspace e-1";
         };
         clock = {
-          format = " {:L%H:%M}";
+          format = "{:L%H:%M}";
           tooltip = true;
-          tooltip-format = "<big>{:%A; %d,%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
+          tooltip-format = "<small>{calendar}</small>";
+          calendar = {
+            mode = "month";
+            weeks-pos = "left";
+            on-scroll = 1;
+            format = {
+              months = ''<span color="#${colors.base06}"><b>{}</b></span>'';
+              weeks = ''<span color="#${colors.base0B}"><b>W{}</b></span>'';
+              weekdays = ''<span color="#${colors.base09}"><b>{}</b></span>'';
+              days = ''<span color="#${colors.base06}"><b>{}</b></span>'';
+              today = ''<span color="#${colors.base08}"><b><u>{}</u></b></span>'';
+            };
+          };
+          actions = {
+            "on-scroll-up" = "shift_up";
+            "on-scroll-down" = "shift_down";
+          };
         };
         "hyprland/window" = {
           format = "{class}{title}";
           icon = false;
+          max-length = 50;
+          # rotate = 90;
           separate-outputs = false;
+          tooltip = true;
           rewrite = {
             "" = "";
           };
@@ -107,11 +130,12 @@ in
         };
         idle_inhibitor = {
           format = "{icon}";
+          tooltip-format-activated = "Idle Inhibitor is active";
+          tooltip-format-deactivated = "Idle Inhibitor is not active";
           format-icons = {
             activated = "󰈈";
             deactivated = "󰈉";
           };
-          tooltip = "true";
         };
         network = {
           interval = 60;
@@ -126,15 +150,14 @@ in
           on-click = "sleep 0.15 && rofi-wifi-menu";
         };
         battery = {
-          interval = 30;
           states = {
             good = 95;
             warning = 30;
-            critical = 20;
+            critical = 15;
           };
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
-          format-plugged = "󰂄  {capacity}%";
+          format = "{icon}";
+          format-charging = "<b>{icon}</b>";
+          format-full = ''<span color="#${colors.base0B}"><b>{icon}</b></span>'';
           format-icons = [
             "󰁻"
             "󰁼"
@@ -143,6 +166,7 @@ in
             "󰂂"
             "󰁹"
           ];
+          tooltip-format = "{timeTo} {capacity} % | {power} W";
         };
         "custom/clipboard" = {
           format = "󰅍";
@@ -184,9 +208,9 @@ in
   home.file.".config/waybar/config.jsonc".source = ./config.jsonc;
   home.file.".config/waybar/style.css".source = ./style.css;
   home.file.".config/waybar/colors.css".text = ''
-    @define-color foreground #${colors.base0F};
+    @define-color foreground #${colors.base04};
     @define-color background #${colors.base00};
-    @define-color cursor #${colors.base0F};
+    @define-color cursor #${colors.base06};
 
     @define-color color0 #${colors.base00};
     @define-color color1 #${colors.base01};
