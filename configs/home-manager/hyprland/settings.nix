@@ -34,7 +34,7 @@ in
     windowrulev2 = [
       "suppressevent maximize, class:.*"
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      "noborder, onworkspace:w[t1]"
+      # "noborder, onworkspace:w[t1]"
 
       # "float,class:^(org.pulseaudio.pavucontrol)$"
       # "float,class:^(blueman-manager)$"
@@ -75,8 +75,8 @@ in
     # };
 
     general = {
-      gaps_in = 0;
-      gaps_out = 0;
+      gaps_in = 2;
+      gaps_out = 4;
       border_size = 1;
       "col.active_border" = "0xff${colors.base0F}";
       "col.inactive_border" = "0xff${colors.base00}";
