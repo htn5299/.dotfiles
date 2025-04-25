@@ -41,6 +41,8 @@ in
       vim.api.nvim_set_hl(0, 'NormalFloat', { fg = '#${palette.base02}', bg = 'none' })
       vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none'})
       vim.api.nvim_set_hl(0, 'FloatTitle', { bg = 'none'})
+
+      vim.api.nvim_set_hl(0, 'Search', { fg = '#${palette.base00}', bg = '#${palette.base04}' })
     '';
   };
 }

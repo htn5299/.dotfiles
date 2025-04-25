@@ -20,6 +20,7 @@
     ../../configs/nixos/apps/keyring.nix
     ../../configs/nixos/apps/opentablet.nix
     ../../configs/nixos/apps/openrazer.nix
+    ../../configs/nixos/apps/dropbox.nix
     ../../configs/nixos/apps/steam.nix
     ../../configs/nixos/apps/xremap.nix
     ../../configs/nixos/apps/postgresql.nix
@@ -72,31 +73,9 @@
   services.xserver.enable = true;
 
   # Enable the Ly Desktop Environment.
-  # services.displayManager = {
-  #   enable = true;
-  #   ly.enable = true;
-  # };
-
-  # gdm
-  services.xserver.displayManager.gdm.enable = true;
-
-  # sddm
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.sddm.wayland.enable = true;
-
-  # Configure Greetd for managing the display manager
-  # services.greetd = {
-  #   enable = true; # Enables the greetd display manager service
-  #   settings = {
-  #     # This block defines the default session settings for greetd.
-  #     default_session = {
-  #       # This line specifies the command that greetd will run.
-  #       # Tells greetd to launch tuigreet, a visually appealing login screen with customizable themes and colors, ...
-  #       # display current time (--time) and start Hyprland when a user logs in (--cmd Hyprland).
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #     };
-  #   };
-  # };
+  services.displayManager.ly = {
+    enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

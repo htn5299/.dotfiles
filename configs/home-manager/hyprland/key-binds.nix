@@ -121,7 +121,7 @@ in
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
-      "$mainMod, O, exec, ghostty -e yazi"
+      "$mainMod, O, exec, $fileManager"
       "$mainMod, Y, exec, ghostty -e yt-x --preview"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"

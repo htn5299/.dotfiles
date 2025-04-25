@@ -60,9 +60,9 @@
     calibre
     telegram-desktop
     bitwarden-desktop
-    dropbox
     rnote
     onlyoffice-bin
+    lunatask
   ];
 
   programs = {

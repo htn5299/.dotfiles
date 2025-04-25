@@ -46,8 +46,13 @@
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots";
     HYPRSHOT_DIR = "$HOME/Pictures/Screenshots";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
-    # QT_STYLE_OVERRIDE = "kvantum";
+
+    # fcitx
+    # GTK_IM_MODULE = "fcitx";
+    # QT_IM_MODULE = "fcitx";
+    # XMODIFIERS = "@im=fcitx";
+    # SDL_IM_MODULE = "fcitx";
+    # GLFW_IM_MODULE = "ibus"; # Fcitx5 has an ibus compatibility layer
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
