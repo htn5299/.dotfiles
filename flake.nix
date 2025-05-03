@@ -4,7 +4,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
     nix-colors.url = "github:misterio77/nix-colors";
-    yt-x.url = "github:Benexl/yt-x";
 
     home-manager = {
       url = "github:nix-community/home-manager";

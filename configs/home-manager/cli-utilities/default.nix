@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     # Coreutils replacements
@@ -43,7 +43,8 @@
     fastfetch
     neofetch
 
+    # Downloader
+    spotdl
     yt-dlp
-    inputs.yt-x.packages."${system}".default
   ];
 }

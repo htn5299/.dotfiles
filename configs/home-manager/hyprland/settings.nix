@@ -24,38 +24,32 @@ in
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
       "hyprctl dispatch workspace 1"
-      # "fcitx5 -D"
       "fcitx5 -d -r"
       "fcitx5-remote -r"
-      # "discord --start-minimized"
-      # "steam -silent"
     ];
     windowrule = [
       "pseudo, noblur, class:(fcitx)"
     ];
     windowrulev2 = [
-      "suppressevent maximize, class:.*"
-      "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      # "suppressevent maximize, class:.*"
+      # "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       # "noborder, onworkspace:w[t1]"
 
-      # "float,class:^(org.pulseaudio.pavucontrol)$"
-      # "float,class:^(blueman-manager)$"
-      # "float,class:^(nm-applet)$"
-      # "float,class:^(waypaper)$"
-      # "float,class:^(zenity)$"
-      # "float,class:^(kvantummanager)$"
-      # "float,class:^(nwg-look)$"
-      # "float,class:^(nwg-displays)$"
-      # "float,class:^(qt6ct)$"
-      # "float,class:^(qt5ct)$"
-      # "float,class:^(mpv)$"
-      # "float,class:^(org.kde.gwenview)$"
-      # "float,class:^(org.gnome.Loupe)$"
-      # "float,class:^(.blueman-manager-wrapped)$"
+      "float,class:^(org.pulseaudio.pavucontrol)$"
+      "float,class:^(blueman-manager)$"
+      "float,class:^(nm-applet)$"
+      "float,class:^(waypaper)$"
+      "float,class:^(zenity)$"
+      "float,class:^(kvantummanager)$"
+      "float,class:^(nwg-look)$"
+      "float,class:^(nwg-displays)$"
+      "float,class:^(qt6ct)$"
+      "float,class:^(qt5ct)$"
+      "float,class:^(mpv)$"
+      "float,class:^(org.kde.gwenview)$"
+      "float,class:^(org.gnome.Loupe)$"
+      "float,class:^(.blueman-manager-wrapped)$"
 
-      # "workspace 2, class:^(zen.*)$"
-      "workspace 8, class:^(mpv)$"
-      "workspace 9, class:^(discord)$"
       "workspace 10, class:^(spotify)$"
 
     ];
@@ -80,8 +74,8 @@ in
       gaps_in = 2;
       gaps_out = 4;
       border_size = 1;
-      "col.active_border" = "0xff${colors.base0F}";
-      "col.inactive_border" = "0xff${colors.base00}";
+      "col.active_border" = "0x55${colors.base0F}";
+      "col.inactive_border" = "0x55${colors.base00}";
       resize_on_border = false;
     };
     decoration = {

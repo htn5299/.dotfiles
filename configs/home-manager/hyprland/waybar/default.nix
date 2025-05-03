@@ -73,10 +73,10 @@ in
         "hyprland/window" = {
           format = "{class}{title}";
           icon = false;
-          max-length = 50;
+          # max-length = 50;
           # rotate = 90;
           separate-outputs = false;
-          tooltip = true;
+          tooltip = false;
           rewrite = {
             "" = "";
           };

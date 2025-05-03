@@ -14,6 +14,7 @@
     ../../configs/home-manager/yazi
     ../../configs/home-manager/kitty
     ../../configs/home-manager/cli-utilities
+    ../../configs/home-manager/commons
     ../../configs/home-manager/git
     ../../configs/home-manager/nixvim
     ../../configs/home-manager/xdg
@@ -47,27 +48,6 @@
       base0E = "#957fb8";
       base0F = "#938AA9"; # accent
     };
-  };
-
-  home.packages = with pkgs; [
-    discord
-    spotify
-    figma-linux
-    qbittorrent
-    nautilus
-    loupe
-    libsForQt5.okular
-    calibre
-    telegram-desktop
-    bitwarden-desktop
-    rnote
-    onlyoffice-bin
-    lunatask
-  ];
-
-  programs = {
-    firefox.enable = true;
-    obs-studio.enable = true;
   };
 
   wayland.windowManager.hyprland.settings = {

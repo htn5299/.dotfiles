@@ -122,7 +122,6 @@ in
     bind = [
       "$mainMod, RETURN, exec, $terminal"
       "$mainMod, O, exec, $fileManager"
-      "$mainMod, Y, exec, ghostty -e yt-x --preview"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"
       "$shiftMod, W, exec, pkill waybar || waybar &"
