@@ -39,8 +39,8 @@
         # hwdec = "auto";
         # vo = "gpu";
 
-        alang = "jpn,jp,eng,en,enUS,en-US,de,ger";
-        slang = "eng,en,und,de,ger,jp,jap";
+        alang = ''japanese,jpn,jap,ja,jp,english,eng,en'';
+        slang = ''japanese,jpn,jap,ja,jp,english,eng,en'';
         screenshot-format = "png";
         screenshot-high-bit-depth = "yes";
         screenshot-png-compression = 3; # Setting too high may lag the PC.
@@ -74,17 +74,25 @@
         sub-visibility = ''yes'';
         sub-color = ''#f7f7f7'';
         sub-shadow-color = ''#16161D'';
-        sub-bold = ''yes'';
-        sub-font-size = 56;
+        # sub-bold = ''yes'';
+        # sub-font-size = 56;
         sub-pos = 90;
-        sub-back-color = ''0.0/0.0/0.0/0.5'';
-        sub-border-style = ''background-box'';
+        # sub-back-color = ''0.0/0.0/0.0/0.5'';
+        # sub-border-style = ''background-box'';
         sub-border-size = 0;
-        sub-shadow-offset = 7;
+        # sub-shadow-offset = 7;
         sub-fix-timing = ''yes'';
         sub-scale-by-window = ''no'';
         sub-ass-scale-with-window = ''no'';
         sub-ass-override = ''scale'';
+
+        sub-blur = 4;
+        sub-font-size = 50;
+        sub-bold = ''yes'';
+        sub-outline-size = 0.5;
+        sub-outline-color = "#000000";
+        sub-shadow-offset = 0.5;
+        sub-back-color = "#000000";
       };
   };
 }

@@ -52,11 +52,9 @@
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      # "DP-1, 2560x1440@165, 1920x0, 1"
-      # "DP-2, 1920x1080@144, 0x0, 1"
-      "eDP-1,1366x768@60.02, 1920x100, 1.0"
+      "eDP-1,1366x768, 1920x100, 1.0"
       "eDP-1,disable"
-      "HDMI-A-1, 1920x1080@60.0, 0x0, 1.0"
+      "HDMI-A-1, 1920x1080, 0x0, 1.0"
     ];
     workspace = [
       "1,monitor:HDMI-A-1"

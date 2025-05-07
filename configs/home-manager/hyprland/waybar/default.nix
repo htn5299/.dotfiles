@@ -71,15 +71,15 @@ in
           };
         };
         "hyprland/window" = {
-          format = "{class}{title}";
+          format = "{title}";
           icon = false;
           # max-length = 50;
           # rotate = 90;
-          separate-outputs = false;
+          # separate-outputs = false;
           tooltip = false;
-          rewrite = {
-            "" = "";
-          };
+          # rewrite = {
+          #   "" = "";
+          # };
         };
         tray = {
           icon-size = 12;

@@ -13,7 +13,8 @@
         {
           name = "CapsLock, nobody needs you";
           remap = {
-            CapsLock = "Ctrl_L";
+            # CapsLock = "Ctrl_L";
+            CapsLock = "WIN_L";
           };
         }
 

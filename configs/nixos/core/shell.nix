@@ -12,6 +12,8 @@
     lsof
     pciutils
     vim
+    nodejs
+    gcc
   ];
 
 }

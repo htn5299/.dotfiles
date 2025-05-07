@@ -35,22 +35,22 @@ in
       # "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       # "noborder, onworkspace:w[t1]"
 
-      "float,class:^(org.pulseaudio.pavucontrol)$"
-      "float,class:^(blueman-manager)$"
-      "float,class:^(nm-applet)$"
-      "float,class:^(waypaper)$"
-      "float,class:^(zenity)$"
-      "float,class:^(kvantummanager)$"
-      "float,class:^(nwg-look)$"
-      "float,class:^(nwg-displays)$"
-      "float,class:^(qt6ct)$"
-      "float,class:^(qt5ct)$"
-      "float,class:^(mpv)$"
-      "float,class:^(org.kde.gwenview)$"
-      "float,class:^(org.gnome.Loupe)$"
-      "float,class:^(.blueman-manager-wrapped)$"
+      # "float,class:^(org.pulseaudio.pavucontrol)$"
+      # "float,class:^(blueman-manager)$"
+      # "float,class:^(nm-applet)$"
+      # "float,class:^(waypaper)$"
+      # "float,class:^(zenity)$"
+      # "float,class:^(kvantummanager)$"
+      # "float,class:^(nwg-look)$"
+      # "float,class:^(nwg-displays)$"
+      # "float,class:^(qt6ct)$"
+      # "float,class:^(qt5ct)$"
+      # "float,class:^(mpv)$"
+      # "float,class:^(org.kde.gwenview)$"
+      # "float,class:^(org.gnome.Loupe)$"
+      # "float,class:^(.blueman-manager-wrapped)$"
 
-      "workspace 10, class:^(spotify)$"
+      "workspace 10, class:^(psst-gui)$"
 
     ];
     input = {
@@ -74,8 +74,8 @@ in
       gaps_in = 2;
       gaps_out = 4;
       border_size = 1;
-      "col.active_border" = "0x55${colors.base0F}";
-      "col.inactive_border" = "0x55${colors.base00}";
+      "col.active_border" = "0x77${colors.base0F}";
+      "col.inactive_border" = "0x77${colors.base00}";
       resize_on_border = false;
     };
     decoration = {

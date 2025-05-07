@@ -15,6 +15,7 @@
     ./highlight-colors.nix
     ./indent.nix
     ./base16.nix
+    ./neo-tree.nix
   ];
 
   programs.nixvim = {
