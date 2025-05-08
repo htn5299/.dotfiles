@@ -7,12 +7,25 @@
 {
   programs.yazi = {
     enable = true;
+    theme = {
+      status = {
+        sep_left = {
+          open = "";
+          close = "";
+        };
+        sep_right = {
+          open = "";
+          close = "";
+        };
+      };
+
+    };
     settings = {
       manager = {
         ratio = [
-          1
+          2
           4
-          4
+          3
         ];
         sort_by = "natural";
         sort_sensitive = true;
@@ -22,7 +35,6 @@
         show_hidden = true;
         show_symlink = true;
       };
-
       preview = {
         image_filter = "lanczos3";
         image_quality = 90;

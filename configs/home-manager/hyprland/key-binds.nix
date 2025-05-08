@@ -73,6 +73,34 @@ let
       ''
         cliphist list | rofi -dmenu -p "Clipboard" | cliphist decode | wl-copy
       '';
+  rofi-screenshot-menu =
+    pkgs.writeScriptBin "rofi-screenshot-menu"
+      # bash
+      ''
+        screenshot_output="  Fullscreen"
+        screenshot_window="󰹑  Window"
+        screenshot_region="󱣴  Region"
+
+        selected=$(
+          printf "%s\n%s\n%s\n%s\n" \
+            "$screenshot_output" "$screenshot_window" "$screenshot_region" |
+            rofi -dmenu -i -p "Screenshot Menu" -lines 3
+        )
+
+        case $selected in
+        "$screenshot_output")
+          hyprshot -m output
+          ;;
+
+        "$screenshot_window")
+          hyprshot -m window
+          ;;
+
+        "$screenshot_region")
+          hyprshot -m region
+          ;;
+        esac
+      '';
   rofi-power-menu =
     pkgs.writeScriptBin "rofi-power-menu"
       # bash
@@ -121,7 +149,7 @@ in
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
-      "$mainMod, O, exec, $fileManager"
+      # "$mainMod, O, exec, $fileManager"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"
       "$shiftMod, W, exec, pkill waybar || waybar &"
@@ -130,21 +158,25 @@ in
       "$subMod SHIFT, Tab, cyclenext, prev"
 
       # screenshot
-      ", PRINT, exec, hyprshot -m output"
-      "$mainMod, PRINT, exec, hyprshot -m window"
-      "$shiftMod, PRINT, exec, hyprshot -m region"
+      # TODO: move to rofi - DONE
+      # ", PRINT, exec, hyprshot -m output"
+      # "$mainMod, PRINT, exec, hyprshot -m window"
+      # "$shiftMod, PRINT, exec, hyprshot -m region"
 
       # color picker
-      "$mainMod, I, exec, hyprpicker -a"
-      "$shiftMod, I, exec, hyprpicker --format=rgb -a"
+      # TODO: move to waybar - DONE
+      # "$mainMod, I, exec, hyprpicker -a"
+      # "$shiftMod, I, exec, hyprpicker --format=rgb -a"
 
       # nofi
-      "$mainMod, U, exec, dunstctl history-pop"
-      "$shiftMod, U, exec, dunstctl close-all"
+      # TODO: move to waybar
+      # "$mainMod, U, exec, dunstctl history-pop"
+      # "$shiftMod, U, exec, dunstctl close-all"
 
       # rofi
-      "$shiftMod, L, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
-      "$shiftMod, H, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
+      "$shiftMod, M, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
+      "$shiftMod, V, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
+      "$shiftMod, S, exec, $killMenu || ${rofi-screenshot-menu}/bin/rofi-screenshot-menu"
       "$mainMod, F, exec, $killMenu || $menu -show drun"
       "$mainMod, R, exec, $killMenu || $menu -show window"
 
@@ -180,13 +212,13 @@ in
 
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
-      "$mainMod, N, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
-      "$mainMod, P, workspace, e-1"
-      "$mainMod, Left, workspace, e-1"
-      "$mainMod, Up, workspace, e-1"
-      "$mainMod, Right, workspace, e+1"
-      "$mainMod, Down, workspace, e+1"
+      # "$mainMod, N, workspace, e+1"
+      # "$mainMod, P, workspace, e-1"
+      # "$mainMod, Left, workspace, e-1"
+      # "$mainMod, Up, workspace, e-1"
+      # "$mainMod, Right, workspace, e+1"
+      # "$mainMod, Down, workspace, e+1"
     ];
 
     bindm = [

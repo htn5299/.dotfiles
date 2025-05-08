@@ -18,6 +18,7 @@
     ../../configs/nixos/core/shell.nix
 
     ../../configs/nixos/apps/keyring.nix
+    ../../configs/nixos/apps/teamviewer.nix
     ../../configs/nixos/apps/opentablet.nix
     ../../configs/nixos/apps/openrazer.nix
     ../../configs/nixos/apps/dropbox.nix
@@ -43,6 +44,7 @@
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
+        timeout = -1;
       };
     };
     # kernelParams = [

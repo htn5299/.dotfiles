@@ -31,12 +31,12 @@ in
           # "network"
           "custom/colorpicker"
           # "custom/clipboard"
-          "custom/screenshot"
+          # "custom/screenshot"
           "idle_inhibitor"
           # "custom/power"
           "battery"
           "pulseaudio"
-          # "custom/notification"
+          "custom/notification"
           "clock"
         ];
         "hyprland/workspaces" = {
@@ -194,6 +194,13 @@ in
           on-scroll-down = "playerctl previous";
           max-length = 50;
           escape = true;
+        };
+        "custom/notification" = {
+          format = "";
+          tooltip = false;
+          on-click = "dunstctl history-pop";
+          on-click-right = "dunstctl close-all";
+          signal = 1;
         };
         "custom/colorpicker" = {
           format = "";

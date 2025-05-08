@@ -39,5 +39,6 @@ in
 
     window-decoration = false
     keybind = ctrl+shift+space=toggle_window_decorations
+    keybind = ctrl+enter=unbind
   '';
 }

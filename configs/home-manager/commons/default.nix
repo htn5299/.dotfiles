@@ -5,7 +5,7 @@
     qbittorrent
     nautilus
     loupe
-    libsForQt5.okular
+    kdePackages.okular
     calibre
     telegram-desktop
     bitwarden-desktop
