@@ -30,3 +30,10 @@ cd ~/.dotfiles
 sudo nixos-rebuild switch --flake "./#pavilion"
 nix run home-manager --no-write-lock-file -- switch --flake "./#htn@pavilion"
 ```
+
+### Git
+```sh
+git remote -v
+git remote set-url origin git@github.com:htn5299/.dotfiles.git
+# git ......
+```
