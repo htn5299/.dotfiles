@@ -19,6 +19,7 @@ in
     ];
     exec-once = [
       "waybar"
+      "dropbox start"
       "nm-applet --indicator"
       "swww init"
       "wl-paste --type text --watch cliphist store"

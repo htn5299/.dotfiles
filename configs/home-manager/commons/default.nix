@@ -16,7 +16,7 @@
   ];
 
   programs = {
-    firefox.enable = true;
+    # firefox.enable = true;
     obs-studio.enable = true;
   };
 }
