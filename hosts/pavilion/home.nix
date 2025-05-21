@@ -10,21 +10,12 @@
   home.username = "htn";
 
   imports = [
-    ../../configs/home-manager/ghostty
-    ../../configs/home-manager/yazi
-    ../../configs/home-manager/kitty
     ../../configs/home-manager/cli-utilities
     ../../configs/home-manager/commons
-    ../../configs/home-manager/git
-    ../../configs/home-manager/nixvim
-    ../../configs/home-manager/xdg
-    ../../configs/home-manager/gtk
-    ../../configs/home-manager/mpv
-    ../../configs/home-manager/qt
-    ../../configs/home-manager/starship
-    ../../configs/home-manager/zsh
-    ../../configs/home-manager/zen-browser
+    ../../configs/home-manager/gui
     ../../configs/home-manager/hyprland
+    ../../configs/home-manager/nixvim
+    # ../../configs/home-manager/xdg
 
     inputs.nixvim.homeManagerModules.nixvim
     inputs.nix-colors.homeManagerModules.default
@@ -33,7 +24,7 @@
     palette = {
       base00 = "#101010";
       base01 = "#1F1F28";
-      base02 = "#2A2A37";
+      base02 = "#44445d";
       base03 = "#54546d";
       base04 = "#727169";
       base05 = "#dcd7ba";
@@ -64,7 +55,7 @@
       "5,monitor:HDMI-A-1"
       "6,monitor:HDMI-A-1"
       "7,monitor:HDMI-A-1"
-      "8,monitor:HDMI-A-1"
+      "8,monitor:eDP-1"
       "9,monitor:eDP-1"
       "10,monitor:eDP-1"
     ];

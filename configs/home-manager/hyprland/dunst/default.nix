@@ -24,7 +24,7 @@ in
         indicate_hidden = "yes";
         shrink = "no";
 
-        separator_height = 1;
+        separator_height = 0;
         separator_color = ''#${colors.base0F}'';
         padding = 15;
         horizontal_padding = 15;
@@ -32,6 +32,8 @@ in
         corner_radius = 0;
         sort = "yes";
         idle_threshold = 120;
+        gaps = true;
+        gap_size = 4;
 
         font = "Ubuntu Nerd Font 10";
         line_height = 0;
@@ -90,15 +92,15 @@ in
         timeout = 1000;
       };
 
-      volume = {
-        appname = "Volume";
-        highlight = ''#${colors.base0F}'';
-      };
+      # volume = {
+      #   appname = "Volume";
+      #   highlight = ''#${colors.base0F}'';
+      # };
 
-      backlight = {
-        appname = "Backlight";
-        highlight = ''#${colors.base0F}'';
-      };
+      # backlight = {
+      #   appname = "Backlight";
+      #   highlight = ''#${colors.base0F}'';
+      # };
     };
   };
   home.file.".local/share/icons/dunst".source = ./icons;

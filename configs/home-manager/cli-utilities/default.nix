@@ -1,5 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [
+    ./git.nix
+    ./starship.nix
+    ./translate-shell.nix
+    ./tmux.nix
+    ./zsh.nix
+    ./yazi.nix
+  ];
+
   home.packages = with pkgs; [
     # Coreutils replacements
     bat # cat alternative

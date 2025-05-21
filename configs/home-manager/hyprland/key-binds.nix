@@ -48,12 +48,12 @@ let
 
         # Use brightnessctl to naturally adjust laptop screen brightness and send a notification
 
-        currentbrightness=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
-        if [ "$currentbrightness" -lt 30 ] && [ "$1" = "down" ]; then exit 1; fi
+        CURRENTBRIGHTNESS=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
+        if [ "$CURRENTBRIGHTNESS" -lt 30 ] && [ "$1" = "down" ]; then exit 1; fi
 
         send_notification() {
         	BRIGHTNESS=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
-        	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$BRIGHTNESS" -i "brightness" "Brightness" "Currently at $brightness%" -t 1000
+        	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$BRIGHTNESS" -i "brightness" "Brightness" "Currently at $CURRENTBRIGHTNESS%" -t 1000
         }
 
         case $1 in
@@ -72,6 +72,30 @@ let
       # bash
       ''
         cliphist list | rofi -dmenu -p "Clipboard" | cliphist decode | wl-copy
+      '';
+
+  rofi-translate =
+    pkgs.writeScriptBin "rofi-translate"
+      # bash
+      ''
+        #!/bin/sh
+
+        # Prompt for translation input using rofi
+        input=$(rofi -dmenu -p "Translate")
+
+        # Check if input is not empty
+        if [[ -n "$input" ]]; then
+            # Translate the input
+            translation=$(trans -b "$input")
+
+            # Remove newlines from translation
+            clean_translation=$(echo "$translation" | tr -d '\n')
+
+            # Only notify if translation is not empty
+            if [[ -n "$clean_translation" ]]; then
+                dunstify -t 5000 "Translation" "$input\n$clean_translation"
+            fi
+        fi
       '';
   rofi-screenshot-menu =
     pkgs.writeScriptBin "rofi-screenshot-menu"
@@ -136,47 +160,27 @@ let
 in
 {
   wayland.windowManager.hyprland.settings = {
-    # "$mainMod" = "SUPER";
-    # "$subMod" = "ALT";
-    # "$term" = "wezterm";
     "$terminal" = "ghostty";
     "$fileManager" = "nautilus";
     "$killMenu" = "killall rofi";
     "$menu" = "rofi -show-icons";
     "$mainMod" = "SUPER";
     "$shiftMod" = "SUPER SHIFT";
-    "$subMod" = "ALT";
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
-      # "$mainMod, O, exec, $fileManager"
+      "$mainMod, O, exec, $fileManager"
       "$mainMod, C, killactive,"
       "$mainMod, V, togglefloating,"
-      "$shiftMod, W, exec, pkill waybar || waybar &"
 
-      "$subMod, Tab, cyclenext"
-      "$subMod SHIFT, Tab, cyclenext, prev"
+      "$mainMod, Tab, cyclenext"
+      "$shiftMod, Tab, cyclenext, prev"
 
-      # screenshot
-      # TODO: move to rofi - DONE
-      # ", PRINT, exec, hyprshot -m output"
-      # "$mainMod, PRINT, exec, hyprshot -m window"
-      # "$shiftMod, PRINT, exec, hyprshot -m region"
-
-      # color picker
-      # TODO: move to waybar - DONE
-      # "$mainMod, I, exec, hyprpicker -a"
-      # "$shiftMod, I, exec, hyprpicker --format=rgb -a"
-
-      # nofi
-      # TODO: move to waybar
-      # "$mainMod, U, exec, dunstctl history-pop"
-      # "$shiftMod, U, exec, dunstctl close-all"
-
-      # rofi
-      "$shiftMod, M, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
-      "$shiftMod, V, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
+      "$shiftMod, L, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
+      "$shiftMod, H, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
       "$shiftMod, S, exec, $killMenu || ${rofi-screenshot-menu}/bin/rofi-screenshot-menu"
+
+      "$mainMod, T, exec, $killMenu || ${rofi-translate}/bin/rofi-translate"
       "$mainMod, F, exec, $killMenu || $menu -show drun"
       "$mainMod, R, exec, $killMenu || $menu -show window"
 
@@ -198,7 +202,7 @@ in
       "$mainMod, 9, workspace, 9"
       "$mainMod, 0, workspace, 10"
 
-      # Move active window to a workspace with mainMod + SHIFT + [0-9]
+      # Move active window to a workspace with mainMod + ALT + [0-9]
       "$shiftMod, 1, movetoworkspace, 1"
       "$shiftMod, 2, movetoworkspace, 2"
       "$shiftMod, 3, movetoworkspace, 3"
@@ -213,12 +217,12 @@ in
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
-      # "$mainMod, N, workspace, e+1"
-      # "$mainMod, P, workspace, e-1"
-      # "$mainMod, Left, workspace, e-1"
-      # "$mainMod, Up, workspace, e-1"
-      # "$mainMod, Right, workspace, e+1"
-      # "$mainMod, Down, workspace, e+1"
+      "$mainMod, N, workspace, e+1"
+      "$mainMod, P, workspace, e-1"
+      "$mainMod, Left, workspace, e-1"
+      "$mainMod, Up, workspace, e-1"
+      "$mainMod, Right, workspace, e+1"
+      "$mainMod, Down, workspace, e+1"
     ];
 
     bindm = [
@@ -255,7 +259,7 @@ in
       "$mainMod, period, exec, ${backlight}/bin/backlight up"
       "$mainMod, minus, exec, ${volume}/bin/volume down"
       "$mainMod, equal, exec, ${volume}/bin/volume up"
-      "$shiftMod, M, exec, volume mute"
+      # "$shiftMod, M, exec, volume mute"
     ];
   };
 }

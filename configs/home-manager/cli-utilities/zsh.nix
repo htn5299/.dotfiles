@@ -40,7 +40,8 @@
       export KEYTIMEOUT=1
       bindkey '^?' backward-delete-char
       bindkey '^e' autosuggest-accept
-      export YT_X_FZF_OPTS="--color 16"
+      bindkey '^p' history-search-backward
+      bindkey '^n' history-search-forward
     '';
   };
 }

@@ -107,9 +107,8 @@ tooltip label {
   /* margin-top: 4px; */
 }
 
-#clock {
-  /* margin-left: 4px; */
-  /* margin-bottom: 4px; */
+#window{
+  color: @fg-alt;
 }
 
 #workspaces button {
@@ -139,3 +138,10 @@ tooltip label {
   color: @bg;
 }
 
+#mpris, #mpris.paused {
+  color: @fg;
+}
+
+#mpris.playing {
+  color: @fg-alt;
+}

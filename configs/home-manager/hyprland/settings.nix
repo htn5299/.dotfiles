@@ -1,6 +1,8 @@
 { lib, config, ... }:
 let
   colors = config.colorScheme.palette;
+  cursor_theme = "Vanilla-DMZ";
+  cursor_size = 24;
 in
 {
   wayland.windowManager.hyprland.settings = {
@@ -9,19 +11,25 @@ in
       # "QT_IM_MODULE, fcitx"
       # "XMODIFIERS, @im=fcitx"
 
-      # hyprland arch config
-      # QT_QPA_PLATFORMTHEME,qt6ct
-      # QT_QPA_PLATFORM,wayland;xcb # Qt should use Wayland first, then X11.
-      # GDK_BACKEND,wayland,x11 # GTK should use Wayland first, then X11.
-      # QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-      # QT_AUTO_SCREEN_SCALE_FACTOR,1
-      # MOZ_ENABLE_WAYLAND,1
+      # "QT_QPA_PLATFORMTHEME,qt6ct"
+      # "QT_QPA_PLATFORM,wayland;xcb"
+      # "GDK_BACKEND,wayland,x11"
+      # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      # "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+      # "MOZ_ENABLE_WAYLAND,1"
+    ];
+    exec = [
+      "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
+      "gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme"
+      "gsettings set org.gnome.desktop.interface icon-theme $icon_theme"
+      "gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme"
+      "gsettings set org.gnome.desktop.interface cursor-size $cursor_size"
+      "gsettings set org.gnome.desktop.wm.preferences button-layout appmenu"
     ];
     exec-once = [
       "waybar"
-      "dropbox start"
       "nm-applet --indicator"
-      "swww init"
+      "swww-daemon"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
       "hyprctl dispatch workspace 1"
@@ -51,8 +59,8 @@ in
       "float,class:^(org.gnome.Loupe)$"
       "float,class:^(.blueman-manager-wrapped)$"
 
-      "workspace 10, class:^(psst-gui)$"
-
+      # "workspace 9, class:^(discord)$"
+      # "workspace 10, class:^(spotity)$"
     ];
     input = {
       kb_layout = "us";
@@ -75,8 +83,8 @@ in
       gaps_in = 2;
       gaps_out = 4;
       border_size = 1;
-      "col.active_border" = "0x77${colors.base0F}";
-      "col.inactive_border" = "0x77${colors.base00}";
+      "col.active_border" = "0xFF${colors.base0F}";
+      "col.inactive_border" = "0xFF${colors.base00}";
       resize_on_border = false;
     };
     decoration = {
@@ -119,6 +127,7 @@ in
         "workspacesOut, 1, 1.94, almostLinear, fade"
       ];
     };
+
     dwindle = {
       pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
       preserve_split = true; # you probably want this

@@ -31,6 +31,7 @@
         };
         files = {
           prompt = "Files❯ ";
+          hidden = false;
           actions = {
             "alt-i" = {
               __raw = "require('fzf-lua.actions').toggle_ignore";

@@ -37,3 +37,8 @@ git remote -v
 git remote set-url origin git@github.com:htn5299/.dotfiles.git
 # git ......
 ```
+
+### Flatpak cursor
+```sh
+flatpak --user override --filesystem=/nix/store:ro
+```

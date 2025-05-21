@@ -14,22 +14,27 @@
     ../../configs/nixos/core/network.nix
     ../../configs/nixos/core/nix.nix
     ../../configs/nixos/core/bluetooth.nix
-    ../../configs/nixos/core/nvidia.nix
+    # ../../configs/nixos/core/nvidia.nix
     ../../configs/nixos/core/shell.nix
 
-    ../../configs/nixos/apps/keyring.nix
-    ../../configs/nixos/apps/teamviewer.nix
-    ../../configs/nixos/apps/opentablet.nix
-    ../../configs/nixos/apps/openrazer.nix
+    ../../configs/nixos/apps/commons.nix
     ../../configs/nixos/apps/dropbox.nix
-    ../../configs/nixos/apps/steam.nix
-    ../../configs/nixos/apps/xremap.nix
+    ../../configs/nixos/apps/flatpak.nix
+    ../../configs/nixos/apps/kanata.nix
+    ../../configs/nixos/apps/keyring.nix
     ../../configs/nixos/apps/postgresql.nix
+    ../../configs/nixos/apps/steam.nix
 
-    ../../configs/nixos/desktop/fonts.nix
     ../../configs/nixos/desktop/fcitx5.nix
+    ../../configs/nixos/desktop/fonts.nix
     ../../configs/nixos/desktop/hyprland.nix
+    ../../configs/nixos/desktop/sound.nix
   ];
+  # ++ (with inputs.nixos-hardware.nixosModules; [
+  #   common-cpu-intel
+  #   common-gpu-nvidia
+  #   common-pc-ssd
+  # ]);
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -38,19 +43,15 @@
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = false;
+      timeout = -1;
 
       grub = {
         enable = true;
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
-        timeout = -1;
       };
     };
-    # kernelParams = [
-    #   "nvidia-drm.modeset=1" # Enables kernel modesetting for the proprietary NVIDIA driver.
-    #   "nouveau.modeset=0" # Disables modesetting for the open-source Nouveau driver, preventing conflicts with proprietary NVIDIA drivers.
-    # ];
   };
 
   # Set your time zone.
@@ -74,13 +75,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the Ly Desktop Environment.
-  # services.displayManager.ly = {
-  #   enable = true;
-  # };
+  # gdm display manager
+  # services.xserver.displayManager.gdm.enable = true;
 
-  # gdm
-  services.xserver.displayManager.gdm.enable = true;
+  # ly display manager
+  services.displayManager.ly.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -90,28 +89,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  # hardware.pulseaudio.enable = false;
-  # hardware has been renamed services
-  services.pulseaudio.enable = false;
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.htn = {
@@ -123,17 +100,8 @@
       "docker"
       "input"
     ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
     shell = pkgs.zsh;
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11";
 }

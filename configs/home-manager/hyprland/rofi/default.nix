@@ -31,11 +31,13 @@ in
         background-alt: #${colors.base01};
         foreground:     #${colors.base05};
         selected:       #${colors.base0F};
+        placeholder:    #${colors.base03};
         active:         #${colors.base0B};
         urgent:         #${colors.base08};
 
         font: "Ubuntu Nerd Font 10";
         border-colour:               var(selected);
+        placeholder-colour:          var(placeholder);
         handle-colour:               var(selected);
         background-colour:           var(background);
         foreground-colour:           var(foreground);
@@ -136,7 +138,8 @@ in
         text-color:                  inherit;
         cursor:                      text;
         placeholder:                 "Search...";
-        placeholder-color:           inherit;
+        // placeholder-color:           inherit;
+        placeholder-color:           @placeholder-colour;
     }
     num-filtered-rows {
         enabled:                     true;
@@ -304,7 +307,7 @@ in
         vertical-align:              0.5;
         horizontal-align:            0.0;
         highlight:                   none;
-        placeholder-color:           @foreground-colour;
+        placeholder-color:           @placeholder-colour;
         blink:                       true;
         markup:                      true;
     }

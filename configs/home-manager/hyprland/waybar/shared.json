@@ -1,26 +1,5 @@
 {
   "layer": "top",
-  "position": "top",
-  "reload_style_on_change": true,
-  "modules-left": [
-    "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "hyprland/window",
-    "custom/spotify"
-  ],
-  "modules-right": [
-    "tray",
-    "custom/clipboard",
-    "custom/screenshot",
-    "custom/colorpicker",
-    "network",
-    "idle_inhibitor",
-    "custom/power",
-    "pulseaudio",
-    "battery",
-    "clock"
-  ],
   "hyprland/workspaces": {
     "format": "{name}",
     "format-icons": {
@@ -32,18 +11,30 @@
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "clock": {
-    "format": " {:L%H:%M}",
+    "format": "{:L%H:%M}",
     "tooltip": true,
-    "tooltip-format": "<big>{:%A, %d,%B %Y }</big>\n<tt><small>{calendar}</small></tt>"
+    "tooltip-format": "<small>{calendar}</small>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#${colors.base06}'><b>{}</b></span>",
+        "weeks": "<span color='#${colors.base0B}'><b>W{}</b></span>",
+        "weekdays": "<span color='#${colors.base09}'><b>{}</b></span>",
+        "days": "<span color='#${colors.base06}'><b>{}</b></span>",
+        "today": "<span color='#${colors.base08}'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
   },
   "hyprland/window": {
-    "format": "{class}{title}",
+    "format": "{title}",
     "icon": false,
-    // "max-length": 50,
-    "separate-outputs": false,
-    "rewrite": {
-      "": ""
-    }
+    "tooltip": false
   },
   "tray": {
     "icon-size": 12,
@@ -94,14 +85,14 @@
   },
   "idle_inhibitor": {
     "format": "{icon}",
+    "tooltip-format-activated": "Idle Inhibitor is active",
+    "tooltip-format-deactivated": "Idle Inhibitor is not active",
     "format-icons": {
       "activated": "󰈈",
       "deactivated": "󰈉"
-    },
-    "tooltip": "true"
+    }
   },
   "network": {
-    // "interface": "wlp2s0", // (Optional) To force the use of this interface
     "interval": 60,
     "interface-ethernet": "enp1s*",
     "interface-wifi": "wlan0",
@@ -114,15 +105,14 @@
     "on-click": "sleep 0.15 && rofi-wifi-menu"
   },
   "battery": {
-    "interval": 30,
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 15
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰂄  {capacity}%",
+    "format": "{icon}",
+    "format-charging": "<b>{icon}</b>",
+    "format-full": "<span color='#${colors.base0B}'><b>{icon}</b></span>",
     "format-icons": [
       "󰁻",
       "󰁼",
@@ -130,7 +120,8 @@
       "󰂀",
       "󰂂",
       "󰁹"
-    ]
+    ],
+    "tooltip-format": "{timeTo} {capacity} % | {power} W"
   },
   "custom/clipboard": {
     "format": "󰅍",
@@ -159,11 +150,24 @@
     "max-length": 50,
     "escape": true
   },
+  "custom/notification": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "dunstctl history-pop",
+    "on-click-right": "dunstctl close-all",
+    "signal": 1
+  },
   "custom/colorpicker": {
     "format": "",
     "tooltip": false,
     "on-click": "sleep 0.15 && hyprpicker -a",
     "on-click-right": "sleep 0.15 && hyprpicker --format=rgb -a",
     "signal": 1
+  },
+  "mpris": {
+    "player": "spotify",
+    "tooltip": false,
+    "max-length": 70,
+    "format": "{title} - {artist}"
   }
 }

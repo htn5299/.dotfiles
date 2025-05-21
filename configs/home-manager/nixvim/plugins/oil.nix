@@ -6,6 +6,21 @@
       default_file_explorer = true;
       delete_to_trash = true;
       skip_confirm_for_simple_edits = true;
+      # columns = [
+      #   "type"
+      #   {
+      #     __unkeyed = "icon";
+      #     default_file = "bar";
+      #     directory = "dir";
+      #     highlight = "Foo";
+      #   }
+      #   "size"
+      #   "permissions"
+      # ];
+      keymaps = {
+        "<leader>e" = "actions.close";
+        "y." = "actions.copy_entry_path";
+      };
       view_options = {
         is_always_hidden.__raw = ''
             function(name, _)

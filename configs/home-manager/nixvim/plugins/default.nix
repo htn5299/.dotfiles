@@ -16,6 +16,7 @@
     ./indent.nix
     ./base16.nix
     ./neo-tree.nix
+    ./neoscroll.nix
   ];
 
   programs.nixvim = {

@@ -24,6 +24,8 @@
     ];
   };
 
+  services.swww.enable = true;
+
   home.packages = with pkgs; [
     hyprshot # screenshot
     hyprpicker # color picker
@@ -33,7 +35,6 @@
     pamixer
     brightnessctl # screen brightness
     playerctl # media player control
-    swww # wallpaper
     waypaper
     cliphist
     wl-clipboard # clipboard manager
