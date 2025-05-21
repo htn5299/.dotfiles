@@ -34,7 +34,7 @@
   "hyprland/window": {
     "format": "{title}",
     "icon": false,
-    "tooltip": false
+    "max-length": 50
   },
   "tray": {
     "icon-size": 12,
@@ -166,8 +166,7 @@
   },
   "mpris": {
     "player": "spotify",
-    "tooltip": false,
-    "max-length": 70,
+    "max-length": 50,
     "format": "{title} - {artist}"
   }
 }

@@ -17,6 +17,7 @@
     ./base16.nix
     ./neo-tree.nix
     ./neoscroll.nix
+    ./tmux-navigator.nix
   ];
 
   programs.nixvim = {

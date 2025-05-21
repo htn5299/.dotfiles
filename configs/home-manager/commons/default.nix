@@ -15,7 +15,7 @@
     loupe
     kdePackages.okular
     calibre
-    telegram-desktop
+    # telegram-desktop
     bitwarden-desktop
     rnote
     onlyoffice-bin

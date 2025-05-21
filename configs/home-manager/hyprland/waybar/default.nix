@@ -16,11 +16,14 @@ in
         include = [ "${./shared.json}" ];
         modules-left = [
           "hyprland/workspaces"
-          "hyprland/window"
         ];
-        modules-right = [
+
+        modules-center = [
+          "hyprland/window"
           "mpris"
-          # "custom/mpris"
+        ];
+
+        modules-right = [
           "tray"
           "custom/colorpicker"
           "idle_inhibitor"

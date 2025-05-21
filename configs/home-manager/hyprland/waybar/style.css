@@ -5,6 +5,7 @@
 /* @define-color bg #101010; */
 @define-color fg-alt @color15;
 @define-color bg-alt @color2;
+@define-color fg-spotify @color11;
 
 * {
   border: none;
@@ -107,10 +108,6 @@ tooltip label {
   /* margin-top: 4px; */
 }
 
-#window{
-  color: @fg-alt;
-}
-
 #workspaces button {
   /* transition-property: background-color; */
   /* transition-duration: 0.3s; */
@@ -139,9 +136,9 @@ tooltip label {
 }
 
 #mpris, #mpris.paused {
-  color: @fg;
+  color: @fg-alt;
 }
 
 #mpris.playing {
-  color: @fg-alt;
+  color: @fg-spotify;
 }

@@ -1,8 +1,6 @@
 { lib, config, ... }:
 let
   colors = config.colorScheme.palette;
-  cursor_theme = "Vanilla-DMZ";
-  cursor_size = 24;
 in
 {
   wayland.windowManager.hyprland.settings = {
@@ -55,6 +53,7 @@ in
       "float,class:^(qt6ct)$"
       "float,class:^(qt5ct)$"
       "float,class:^(mpv)$"
+      "float,class:^(org.telegram.desktop)$"
       "float,class:^(org.kde.gwenview)$"
       "float,class:^(org.gnome.Loupe)$"
       "float,class:^(.blueman-manager-wrapped)$"

@@ -14,7 +14,7 @@
     ../../configs/nixos/core/network.nix
     ../../configs/nixos/core/nix.nix
     ../../configs/nixos/core/bluetooth.nix
-    # ../../configs/nixos/core/nvidia.nix
+    ../../configs/nixos/core/nvidia.nix
     ../../configs/nixos/core/shell.nix
 
     ../../configs/nixos/apps/commons.nix

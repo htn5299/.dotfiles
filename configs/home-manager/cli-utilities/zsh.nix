@@ -4,7 +4,7 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    tmux.enableShellIntegration = true;
+    # tmux.enableShellIntegration = true;
   };
 
   programs.zoxide = {
@@ -35,13 +35,17 @@
     };
 
     initExtra = ''
-      unsetopt PROMPT_SP
-      bindkey -v
-      export KEYTIMEOUT=1
+      # unsetopt PROMPT_SP
+      # bindkey -v
+      # export KEYTIMEOUT=1
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+      function zvm_after_init() {
+        zvm_bindkey viins "^R" fzf-history-widget
+      }
+
       bindkey '^?' backward-delete-char
       bindkey '^e' autosuggest-accept
-      bindkey '^p' history-search-backward
-      bindkey '^n' history-search-forward
     '';
   };
 }

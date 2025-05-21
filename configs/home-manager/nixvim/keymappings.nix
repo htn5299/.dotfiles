@@ -326,6 +326,15 @@
         action = "<cmd>vertical resize +2<cr>";
         options.desc = "Increase Window Width";
       }
+      {
+        key = "<C-a>";
+        action = "<Nop>";
+        mode = "n"; # normal mode
+        options = {
+          noremap = true;
+          silent = true;
+        };
+      }
     ];
   };
 }
