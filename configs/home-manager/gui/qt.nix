@@ -18,4 +18,13 @@
     "Kvantum/catppuccin-frappe-blue".source =
       "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue";
   };
+
+  # xdg.configFile = {
+  #   "Kvantum/kvantum.kvconfig".text = ''
+  #     [General]
+  #     theme=Nordic-Darker
+  #   '';
+  #
+  #   "Kvantum/Nordic-Darker".source = "${pkgs.nordic}/share/Kvantum/Nordic-Darker";
+  # };
 }

@@ -24,6 +24,7 @@
     ../../configs/nixos/apps/keyring.nix
     ../../configs/nixos/apps/postgresql.nix
     ../../configs/nixos/apps/steam.nix
+    ../../configs/nixos/apps/thunar.nix
 
     ../../configs/nixos/desktop/fcitx5.nix
     ../../configs/nixos/desktop/fonts.nix

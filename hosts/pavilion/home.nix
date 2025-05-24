@@ -15,7 +15,7 @@
     ../../configs/home-manager/gui
     ../../configs/home-manager/hyprland
     ../../configs/home-manager/nixvim
-    # ../../configs/home-manager/xdg
+    ../../configs/home-manager/xdg
 
     inputs.nixvim.homeManagerModules.nixvim
     inputs.nix-colors.homeManagerModules.default
@@ -44,7 +44,7 @@
   wayland.windowManager.hyprland.settings = {
     monitor = [
       "eDP-1,1366x768, 1920x100, 1.0"
-      "eDP-1,disable"
+      # "eDP-1,disable"
       "HDMI-A-1, 1920x1080, 0x0, 1.0"
     ];
     workspace = [
@@ -53,11 +53,11 @@
       "3,monitor:HDMI-A-1"
       "4,monitor:HDMI-A-1"
       "5,monitor:HDMI-A-1"
-      "6,monitor:HDMI-A-1"
-      "7,monitor:HDMI-A-1"
+      "6,monitor:eDP-1"
+      "7,monitor:eDP-1"
       "8,monitor:eDP-1"
-      "9,monitor:eDP-1"
-      "10,monitor:eDP-1"
+      "9,monitor:HDMI-A-1"
+      "10,monitor:HDMI-A-1"
     ];
     input.kb_layout = "us";
   };

@@ -1,11 +1,21 @@
 {
+  pkgs,
   config,
+  lib,
   ...
 }:
 let
   colors = config.colorScheme.palette;
+  power-menu = import ../../scripts/power-menu-rofi.nix { inherit pkgs; };
+  clipboard-menu = import ../../scripts/clipboard-rofi.nix { inherit pkgs; };
+  screenshot-menu = import ../../scripts/screenshot-rofi.nix { inherit pkgs; };
 in
 {
+  home.packages = [
+    power-menu
+    clipboard-menu
+    screenshot-menu
+  ];
   programs.waybar = {
     enable = true;
     style = builtins.readFile ./style.css;
@@ -16,22 +26,42 @@ in
         include = [ "${./shared.json}" ];
         modules-left = [
           "hyprland/workspaces"
+          "hyprland/window"
         ];
 
         modules-center = [
-          "hyprland/window"
-          "mpris"
         ];
 
         modules-right = [
+          "mpris"
           "tray"
-          "custom/colorpicker"
-          "idle_inhibitor"
-          "battery"
           "pulseaudio"
+          "idle_inhibitor"
+          "custom/colorpicker"
+          "custom/screenshot"
+          "custom/clipboard"
           "custom/notification"
+          "battery"
+          "custom/menu"
+          "custom/power"
           "clock"
         ];
+        "custom/power" = {
+          format = "󰚥";
+          tooltip = false;
+          on-click = "killall rofi || ${power-menu}/bin/power-menu-rofi";
+        };
+        "custom/clipboard" = {
+          format = "";
+          tooltip = false;
+          on-click = "killall rofi ||  ${clipboard-menu}/bin/clipboard-rofi";
+        };
+
+        "custom/screenshot" = {
+          format = "";
+          tooltip = false;
+          on-click = "killall rofi ||  ${screenshot-menu}/bin/screenshot-rofi";
+        };
       }
     ];
   };

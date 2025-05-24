@@ -11,72 +11,31 @@
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "clock": {
-    "format": "{:L%H:%M}",
-    "tooltip": true,
-    "tooltip-format": "<small>{calendar}</small>",
-    "calendar": {
-      "mode": "month",
-      "weeks-pos": "left",
-      "on-scroll": 1,
-      "format": {
-        "months": "<span color='#${colors.base06}'><b>{}</b></span>",
-        "weeks": "<span color='#${colors.base0B}'><b>W{}</b></span>",
-        "weekdays": "<span color='#${colors.base09}'><b>{}</b></span>",
-        "days": "<span color='#${colors.base06}'><b>{}</b></span>",
-        "today": "<span color='#${colors.base08}'><b><u>{}</u></b></span>"
-      }
-    },
-    "actions": {
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
+    "format": "{:%d.%m - %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "hyprland/window": {
     "format": "{title}",
     "icon": false,
-    "max-length": 50
+    "tooltip": false
   },
   "tray": {
-    "icon-size": 12,
+    "icon-size": 11,
     "show-passive-items": true,
-    "spacing": 12
+    "spacing": 10
   },
   "pulseaudio": {
-    "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": "{icon} {volume}% {format_source}",
-    "format-bluetooth-muted": "{icon} {format_source}",
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
     "format-muted": "󰝟",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
     "format-icons": {
-      "headphones": [
-        " ",
-        " ",
-        " "
-      ],
+      "headphones": "",
       "handsfree": "󰴸",
-      "headset": [
-        " ",
-        " ",
-        " "
-      ],
-      "phone": [
-        " ",
-        " ",
-        " "
-      ],
-      "portable": [
-        " ",
-        " ",
-        " "
-      ],
-      "car": [
-        " ",
-        " ",
-        " "
-      ],
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
       "default": [
-        "",
         "",
         ""
       ]
@@ -88,8 +47,8 @@
     "tooltip-format-activated": "Idle Inhibitor is active",
     "tooltip-format-deactivated": "Idle Inhibitor is not active",
     "format-icons": {
-      "activated": "󰈈",
-      "deactivated": "󰈉"
+      "activated": "󰌢",
+      "deactivated": "󰤄"
     }
   },
   "network": {
@@ -114,7 +73,7 @@
     "format-charging": "<b>{icon}</b>",
     "format-full": "<span color='#${colors.base0B}'><b>{icon}</b></span>",
     "format-icons": [
-      "󰁻",
+      "󰁺",
       "󰁼",
       "󰁾",
       "󰂀",
@@ -151,7 +110,7 @@
     "escape": true
   },
   "custom/notification": {
-    "format": "",
+    "format": "",
     "tooltip": false,
     "on-click": "dunstctl history-pop",
     "on-click-right": "dunstctl close-all",
@@ -164,9 +123,14 @@
     "on-click-right": "sleep 0.15 && hyprpicker --format=rgb -a",
     "signal": 1
   },
+  "custom/menu": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "killall rofi || rofi -show-icons -show drun"
+  },
   "mpris": {
     "player": "spotify",
-    "max-length": 50,
+    "tooltip": false,
     "format": "{title} - {artist}"
   }
 }

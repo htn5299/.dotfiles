@@ -27,6 +27,7 @@
   services.swww.enable = true;
 
   home.packages = with pkgs; [
+    waybar
     hyprshot # screenshot
     hyprpicker # color picker
     hypridle

@@ -15,15 +15,24 @@
       package = pkgs.adw-gtk3;
       name = "adw-gtk3-dark";
 
-      # package = pkgs.dracula-theme;
-      # name = "Dracula";
+      # package = pkgs.orchis-theme;
+      # name = "Orchis-Purple-Dark-Compact";
+
+      # package = pkgs.catppuccin-gtk;
+      # name = "catppuccin-frappe-blue-standard";
+
+      # package = pkgs.nordic;
+      # name = "Nordic-darker";
+
+      # package = pkgs.flat-remix-gtk;
+      # name = "Flat-Remix-GTK-Blue-Dark";
     };
     iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
+      # package = pkgs.adwaita-icon-theme;
+      # name = "Adwaita";
 
-      # package = pkgs.arc-icon-theme;
-      # name = "Arc";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
     };
     font = {
       name = "Sans";

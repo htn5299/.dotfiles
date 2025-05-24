@@ -1,167 +1,24 @@
 { pkgs, ... }:
 let
-  volume =
-    pkgs.writeScriptBin "volume"
-      # bash
-      ''
-        case $1 in
-        up)
-          # Set the volume on (if it was muted)
-          wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-          wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+
-          ;;
-        down)
-          wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-          wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%-
-          ;;
-        mute)
-          wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-          ;;
-        esac
-
-        VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | tr -dc '0-9' | sed 's/^0\{1,2\}//')
-
-        send_notification() {
-          if [ "$1" = "mute" ]; then ICON="mute"; elif [ "$VOLUME" -lt 33 ]; then ICON="low"; elif [ "$VOLUME" -lt 66 ]; then ICON="medium"; else ICON="high"; fi
-          if [ "$1" = "mute" ]; then TEXT="Currently muted"; else TEXT="Currently at $VOLUME%"; fi
-
-          dunstify -a "Volume" -r 9993 -h int:value:"$VOLUME" -i "volume-$ICON" "Volume" "$TEXT" -t 2000
-        }
-
-        case $1 in
-        mute)
-          case "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" in
-          *MUTED*) send_notification mute ;;
-          *) send_notification ;;
-          esac
-          ;;
-        *)
-          send_notification
-          ;;
-        esac
-      '';
-  backlight =
-    pkgs.writeScriptBin "backlight"
-      # bash
-      ''
-        #!/bin/sh
-
-        # Use brightnessctl to naturally adjust laptop screen brightness and send a notification
-
-        CURRENTBRIGHTNESS=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
-        if [ "$CURRENTBRIGHTNESS" -lt 30 ] && [ "$1" = "down" ]; then exit 1; fi
-
-        send_notification() {
-        	BRIGHTNESS=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
-        	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$BRIGHTNESS" -i "brightness" "Brightness" "Currently at $CURRENTBRIGHTNESS%" -t 1000
-        }
-
-        case $1 in
-        	up)
-        		brightnessctl -e4 set 5%+
-        		send_notification "$1"
-        		;;
-        	down)
-        		brightnessctl -e4 set 5%-
-        		send_notification "$1"
-        		;;
-        esac
-      '';
-  rofi-clipboard =
-    pkgs.writeScriptBin "rofi-clipboard"
-      # bash
-      ''
-        cliphist list | rofi -dmenu -p "Clipboard" | cliphist decode | wl-copy
-      '';
-
-  rofi-translate =
-    pkgs.writeScriptBin "rofi-translate"
-      # bash
-      ''
-        #!/bin/sh
-
-        # Prompt for translation input using rofi
-        input=$(rofi -dmenu -p "Translate")
-
-        # Check if input is not empty
-        if [[ -n "$input" ]]; then
-            # Translate the input
-            translation=$(trans -b "$input")
-
-            # Remove newlines from translation
-            clean_translation=$(echo "$translation" | tr -d '\n')
-
-            # Only notify if translation is not empty
-            if [[ -n "$clean_translation" ]]; then
-                dunstify -t 5000 "Translation" "$input\n$clean_translation"
-            fi
-        fi
-      '';
-  rofi-screenshot-menu =
-    pkgs.writeScriptBin "rofi-screenshot-menu"
-      # bash
-      ''
-        screenshot_output="  Fullscreen"
-        screenshot_window="󰹑  Window"
-        screenshot_region="󱣴  Region"
-
-        selected=$(
-          printf "%s\n%s\n%s\n%s\n" \
-            "$screenshot_output" "$screenshot_window" "$screenshot_region" |
-            rofi -dmenu -i -p "Screenshot Menu" -lines 3
-        )
-
-        case $selected in
-        "$screenshot_output")
-          hyprshot -m output
-          ;;
-
-        "$screenshot_window")
-          hyprshot -m window
-          ;;
-
-        "$screenshot_region")
-          hyprshot -m region
-          ;;
-        esac
-      '';
-  rofi-power-menu =
-    pkgs.writeScriptBin "rofi-power-menu"
-      # bash
-      ''
-        lang_pc_shutdown="  Shutdown"
-        lang_pc_reboot="  Reboot"
-        lang_pc_logout="  Logout"
-        lang_pc_lock="  Lock"
-
-        selected=$(
-          printf "%s\n%s\n%s\n%s\n" \
-            "$lang_pc_lock" "$lang_pc_logout" "$lang_pc_reboot" "$lang_pc_shutdown" |
-            rofi -dmenu -i -p "Power Menu" -lines 4
-        )
-
-        case $selected in
-        "$lang_pc_shutdown")
-          systemctl poweroff
-          ;;
-
-        "$lang_pc_reboot")
-          systemctl reboot
-          ;;
-
-        "$lang_pc_logout")
-          hyprctl dispatch exit
-          ;;
-        "$lang_pc_lock")
-          hyprctl dispatch exec hyprlock
-          ;;
-        esac
-      '';
+  power-menu = import ../scripts/power-menu-rofi.nix { inherit pkgs; };
+  clipboard-menu = import ../scripts/clipboard-rofi.nix { inherit pkgs; };
+  screenshot-menu = import ../scripts/screenshot-rofi.nix { inherit pkgs; };
+  translate-menu = import ../scripts/translate-rofi.nix { inherit pkgs; };
+  backlight = import ../scripts/backlight.nix { inherit pkgs; };
+  volume = import ../scripts/volume.nix { inherit pkgs; };
 in
 {
+  home.packages = [
+    power-menu
+    clipboard-menu
+    screenshot-menu
+    translate-menu
+    backlight
+    volume
+  ];
   wayland.windowManager.hyprland.settings = {
     "$terminal" = "ghostty";
-    "$fileManager" = "nautilus";
+    "$fileManager" = "thunar";
     "$killMenu" = "killall rofi";
     "$menu" = "rofi -show-icons";
     "$mainMod" = "SUPER";
@@ -176,11 +33,11 @@ in
       "$mainMod, Tab, cyclenext"
       "$shiftMod, Tab, cyclenext, prev"
 
-      "$shiftMod, L, exec, $killMenu || ${rofi-power-menu}/bin/rofi-power-menu"
-      "$shiftMod, H, exec, $killMenu || ${rofi-clipboard}/bin/rofi-clipboard"
-      "$shiftMod, S, exec, $killMenu || ${rofi-screenshot-menu}/bin/rofi-screenshot-menu"
+      "$shiftMod, L, exec, $killMenu || ${power-menu}/bin/power-menu-rofi"
+      "$shiftMod, H, exec, $killMenu || ${clipboard-menu}/bin/clipboard-rofi"
+      "$shiftMod, S, exec, $killMenu || ${screenshot-menu}/bin/screenshot-rofi"
 
-      "$mainMod, T, exec, $killMenu || ${rofi-translate}/bin/rofi-translate"
+      "$mainMod, T, exec, $killMenu || ${translate-menu}/bin/translate-rofi"
       "$mainMod, F, exec, $killMenu || $menu -show drun"
       "$mainMod, R, exec, $killMenu || $menu -show window"
 

@@ -47,6 +47,7 @@
     unrar
     unzip
     zip
+    file-roller
 
     # Rice
     fastfetch

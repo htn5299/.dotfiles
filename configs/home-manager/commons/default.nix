@@ -7,20 +7,20 @@
     ./mpv.nix
     ./zen.nix
   ];
+
   home.packages = with pkgs; [
     discord
     # spotify
     qbittorrent
-    nautilus
-    loupe
-    kdePackages.okular
     calibre
-    # telegram-desktop
     bitwarden-desktop
     rnote
     onlyoffice-bin
     lunatask
     krita
+    xfce.ristretto
+    evince
+    # telegram-desktop
     # figma-linux
   ];
 

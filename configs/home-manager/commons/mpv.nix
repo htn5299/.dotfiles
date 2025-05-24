@@ -31,8 +31,8 @@
         sub-font = "Ubuntu Nerd Font";
       in
       {
-        keep-open = "yes";
-        autofit = "90%";
+        keep-open = ''yes'';
+        autofit = "80%";
         volume = 80;
         volume-max = 100;
 
@@ -41,12 +41,12 @@
 
         alang = ''english,eng,en,japanese,jpn,jap,ja,jp'';
         slang = ''english,eng,en,japanese,jpn,jap,ja,jp'';
-        screenshot-format = "png";
-        screenshot-high-bit-depth = "yes";
+        screenshot-format = ''png'';
+        screenshot-high-bit-depth = ''yes'';
         screenshot-png-compression = 3; # Setting too high may lag the PC.
-        screenshot-directory = "~/Pictures/screenshots";
+        screenshot-directory = ''~/Pictures/screenshots'';
         screenshot-template = "%F - [%P] (%#01n)";
-        save-position-on-quit = "yes";
+        save-position-on-quit = ''yes'';
         reset-on-next-file = "audio-delay,mute,pause,speed,sub-delay,video-aspect-override,video-pan-x,video-pan-y,video-rotate,video-zoom,volume";
 
         # OSD
@@ -56,39 +56,39 @@
         osd-font-size = 24;
 
         # ytdl
-        ytdl-format = ''bestvideo[height<=?1080]+bestaudio/best'';
+        ytdl-format = "bestvideo[height<=?1080]+bestaudio/best";
 
         # Show subs, guess on what subs, prioritize japanese, try to fix timings, make subs a bit bigger
-        audio-file-auto = ''fuzzy'';
-        autofit-larger = ''100%x100%'';
-        geometry = ''50%:50%'';
+        audio-file-auto = "fuzzy";
+        autofit-larger = "100%x100%";
+        geometry = "50%:50%";
 
         # Sub appearance
         inherit sub-font;
-        # sub-auto = ''all'';
-        sub-auto = ''fuzzy'';
-        sub-visibility = ''yes'';
-        sub-color = ''#f7f7f7'';
-        sub-shadow-color = ''#16161D'';
+        # sub-auto = ''fuzzy'';
+        # sub-pos = 90;
         # sub-bold = ''yes'';
         # sub-font-size = 56;
-        sub-pos = 90;
-        # sub-back-color = ''0.0/0.0/0.0/0.5'';
-        # sub-border-style = ''background-box'';
-        sub-border-size = 0;
-        # sub-shadow-offset = 7;
-        sub-fix-timing = ''yes'';
         sub-scale-by-window = ''no'';
         sub-ass-scale-with-window = ''no'';
         sub-ass-override = ''scale'';
 
-        sub-blur = 13;
-        sub-font-size = 50;
+        sub-auto = "fuzzy";
+        sub-font-size = ''52'';
+        sub-color = ''0.95/0.95/0.95/1'';
+        sub-blur = ''0.2'';
         sub-bold = ''yes'';
-        sub-outline-size = 0.5;
-        sub-outline-color = "#000000";
-        sub-shadow-offset = 0.5;
-        sub-back-color = "#000000";
+        sub-border-size = ''3'';
+        sub-border-color = ''0.05/0.05/0.05/1'';
+        sub-spacing = ''1.5'';
+        sub-shadow-offset = ''1'';
+        sub-shadow-color = ''0/0/0/0.25'';
+        sub-use-margins = ''no'';
+        sub-margin-y = ''50'';
+        sub-margin-x = ''100'';
+        sub-scale-with-window = ''no'';
+        demuxer-mkv-subtitle-preroll = ''yes'';
+        sub-fix-timing = ''no'';
       };
   };
 }

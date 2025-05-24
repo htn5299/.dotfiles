@@ -27,6 +27,7 @@ in
     exec-once = [
       "waybar"
       "nm-applet --indicator"
+      "blueman-applet"
       "swww-daemon"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
@@ -58,8 +59,9 @@ in
       "float,class:^(org.gnome.Loupe)$"
       "float,class:^(.blueman-manager-wrapped)$"
 
-      # "workspace 9, class:^(discord)$"
-      # "workspace 10, class:^(spotity)$"
+      "workspace 9, class:^(discord)$"
+      "workspace 10, class:^(Spotify)$"
+      "workspace 10, class:^(spotify)$"
     ];
     input = {
       kb_layout = "us";
