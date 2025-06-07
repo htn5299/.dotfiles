@@ -2,9 +2,9 @@
   programs.nixvim.autoCmd = [
     {
       callback.__raw = ''
-      function()
-        vim.highlight.on_yank()
-      end
+        function()
+          vim.highlight.on_yank()
+        end
       '';
       desc = "Highlight when yanking";
       event = "TextYankPost";
@@ -13,13 +13,13 @@
 
     {
       callback.__raw = ''
-      function(event)
-        if event.match:match("^%w%w+:[\\/][\\/]") then
-          return
+        function(event)
+          if event.match:match("^%w%w+:[\\/][\\/]") then
+            return
+          end
+          local file = vim.uv.fs_realpath(event.match) or event.match
+          vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
         end
-        local file = vim.uv.fs_realpath(event.match) or event.match
-        vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-      end
       '';
       desc = "Automatically create directories when saving a file, in case a intermediate directory does not exist";
       event = "BufWritePre";

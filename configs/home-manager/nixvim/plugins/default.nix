@@ -1,23 +1,21 @@
 {
   imports = [
-    ./alpha.nix
-    ./oil.nix
-    ./fzf-lua
-    ./lsp.nix
-    ./treesitter.nix
-    ./lualine.nix
-    ./nix.nix
-    ./git.nix
-    ./which-key.nix
-    ./blink-cmp.nix
-    ./lz-n.nix
-    ./conform.nix
-    ./highlight-colors.nix
-    ./indent.nix
     ./base16.nix
+    ./blink.nix
+    ./conform.nix
+    ./fzf-lua.nix
+    ./gitsigns.nix
+    ./highlight-colors.nix
+    ./lint.nix
+    ./lsp.nix
     ./neo-tree.nix
-    ./neoscroll.nix
+    ./neocord.nix
+    ./oil.nix
+    ./snacks.nix
     ./tmux-navigator.nix
+    ./treesitter.nix
+    ./trouble.nix
+    ./which-key.nix
   ];
 
   programs.nixvim = {
@@ -25,14 +23,16 @@
     defaultEditor = true;
 
     plugins = {
+      nix.enable = true;
       web-devicons.enable = true;
       nvim-autopairs.enable = true;
       nvim-surround.enable = true;
       ts-autotag.enable = true;
       comment.enable = true;
+      fugitive.enable = true;
       dressing.enable = true;
-      # barbecue.enable = true;
-      # navic.enable = true;
+      lz-n.enable = true;
+      markview.enable = true;
     };
   };
 }

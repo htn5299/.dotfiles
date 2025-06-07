@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 let
   palette = config.colorScheme.palette;
 in
@@ -27,22 +27,28 @@ in
       	base0E = "#${palette.base0E}",
       	base0F = "#${palette.base0F}",
       }
-      require('base16-colorscheme').setup(colors_palette)
+      require("base16-colorscheme").setup(colors_palette)
 
-      vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#${palette.base03}', bg = '#${palette.base00}' })
-      vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = '#${palette.base02}', bg = '#${palette.base00}' })
-      vim.api.nvim_set_hl(0, 'FzfLuaBorder', { fg = '#${palette.base03}'})
-      vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#${palette.base03}'})
-      vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#${palette.base00}'})
-      vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#${palette.base01}'})
-      vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = '#${palette.base02}'})
-      vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#${palette.base01}'})
+      vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#${palette.base03}", bg = "none" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#${palette.base03}", bg = "none"})
+      vim.api.nvim_set_hl(0, "FloatTitle", { bg = "none"})
 
-      vim.api.nvim_set_hl(0, 'NormalFloat', { fg = '#${palette.base02}', bg = 'none' })
-      vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none'})
-      vim.api.nvim_set_hl(0, 'FloatTitle', { bg = 'none'})
+      vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = "#${palette.base03}"})
+      vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#${palette.base03}"})
+      vim.api.nvim_set_hl(0, "StatusLine", { fg = "#${palette.base03}", bg = "#${palette.base00}" })
+      vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#${palette.base02}", bg = "#${palette.base00}" })
 
-      vim.api.nvim_set_hl(0, 'Search', { fg = '#${palette.base00}', bg = '#${palette.base04}' })
+      vim.api.nvim_set_hl(0, "Pmenu", { fg= "#${palette.base03}", bg = "#${palette.base00}"})
+      vim.api.nvim_set_hl(0, "PmenuSel", { fg ="#${palette.base03}", bg = "#${palette.base01}"})
+      vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "#${palette.base02}"})
+      vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#${palette.base01}"})
+      vim.api.nvim_set_hl(0, "CmpItemAbbr", { bg = "#${palette.base00}"})
+
+
+      vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#${palette.base03}" })
+      vim.api.nvim_set_hl(0, "MsgArea", { fg = "#${palette.base04}" })
+
+      vim.api.nvim_set_hl(0, "Search", { fg = "#${palette.base00}", bg = "#${palette.base04}" })
     '';
   };
 }

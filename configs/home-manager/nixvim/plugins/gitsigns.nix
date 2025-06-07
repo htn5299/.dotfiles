@@ -1,30 +1,9 @@
+{ ... }:
 {
-  programs.nixvim.plugins.fugitive.enable = true;
   programs.nixvim.plugins.gitsigns = {
     enable = true;
 
     settings = {
-      signs = {
-        add = {
-          text = "│";
-        };
-        change = {
-          text = "│";
-        };
-        delete = {
-          text = "│";
-        };
-        topdelete = {
-          text = "│";
-        };
-        changedelete = {
-          text = "│";
-        };
-        untracked = {
-          text = "│";
-        };
-      };
-
       on_attach.__raw = ''
         function(bufnr)
           local gs = package.loaded.gitsigns

@@ -6,18 +6,11 @@
       default_file_explorer = true;
       delete_to_trash = true;
       skip_confirm_for_simple_edits = true;
-      # columns = [
-      #   "type"
-      #   {
-      #     __unkeyed = "icon";
-      #     default_file = "bar";
-      #     directory = "dir";
-      #     highlight = "Foo";
-      #   }
-      #   "size"
-      #   "permissions"
-      # ];
       keymaps = {
+        "<C-h>" = false;
+        "<C-j>" = false;
+        "<C-k>" = false;
+        "<C-l>" = false;
         "<leader>e" = "actions.close";
         "y." = "actions.copy_entry_path";
       };

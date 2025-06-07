@@ -1,127 +1,68 @@
-{ lib, pkgs, ... }:
-let
-  inherit (lib) getExe getExe';
-in
+{ pkgs, ... }:
 {
+  programs.nixvim.extraPackages = with pkgs; [ shfmt ];
   programs.nixvim.plugins.conform-nvim = {
     enable = true;
-    lazyLoad.settings = {
-      cmd = "ConformInfo";
-      event = "BufWritePre";
-      keys = [
-        {
-          __unkeyed-1 = "<leader>fm";
-          __unkeyed-2.__raw = ''
-            function()
-              require("conform").format({ async = true, lsp_format = "fallback" })
-            end
-          '';
-          mode = [
-            "n"
-            "v"
-          ];
-          desc = "Format buffer";
-        }
-      ];
-    };
-
     settings = {
-      format_on_save.__raw = ''
-        function(bufnr)
-          if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
-            return
-          end
-
-          return { timeout_ms = 500, lsp_format = "fallback" }
-        end
-      '';
-
-      formatters = {
-        nixfmt.command = getExe pkgs.nixfmt-rfc-style;
-        ruff_fix.command = getExe pkgs.ruff;
-        ruff_format.command = getExe pkgs.ruff;
-        ruff_organize_imports.command = getExe pkgs.ruff;
-        rustfmt.command = getExe pkgs.rustfmt;
-        squeeze_blanks.command = getExe' pkgs.coreutils "cat";
-        stylua.command = getExe pkgs.stylua;
+      format_on_save = {
+        lspFallback = true;
+        timeoutMs = 500;
       };
-
+      notify_on_error = true;
       formatters_by_ft = {
-        _ = [
-          "squeeze_blanks"
-          "trim_whitespace"
+        html = [
+          [
+            "prettierd"
+            "prettier"
+          ]
         ];
+        css = [
+          [
+            "prettierd"
+            "prettier"
+          ]
+        ];
+        javascript = [
+          [
+            "prettierd"
+            "prettier"
+          ]
+        ];
+        javascriptreact = [
+          [
+            "prettierd"
+            "prettier"
+          ]
+        ];
+        typescript = [
+          [
+            "prettierd"
+            "prettier"
+          ]
+        ];
+        typescriptreact = [
+          [
+            "prettierd"
+            "prettier"
+          ]
+        ];
+        python = [ "black" ];
         lua = [ "stylua" ];
         nix = [ "nixfmt" ];
-        python = [
-          "ruff_fix"
-          "ruff_format"
-          "ruff_organize_imports"
+        markdown = [
+          [
+            "prettierd"
+            "prettier"
+          ]
         ];
-        rust = [ "rustfmt" ];
+        yaml = [
+          "yamllint"
+          "yamlfmt"
+        ];
+        terragrunt = [ "hcl" ];
+        bash = [ "shfmt" ];
+        sh = [ "shfmt" ];
       };
-
-      notify_on_error = false;
-    };
-  };
-
-  programs.nixvim.userCommands = {
-    FormatDisable = {
-      bang = true;
-      command.__raw = ''
-        function(args)
-          if args.bang then
-            vim.b.autoformat = false
-            vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
-          else
-            vim.g.autoformat = false
-            vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
-          end
-        end
-      '';
-      desc = "Disable automatic formatting on save";
-    };
-
-    FormatEnable = {
-      bang = true;
-      command.__raw = ''
-        function(args)
-          if args.bang then
-            vim.b.autoformat = true
-            vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
-          else
-            vim.g.autoformat = true
-            vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
-          end
-        end
-      '';
-      desc = "Enable automatic formatting on save";
-    };
-
-    FormatToggle = {
-      bang = true;
-      command.__raw = ''
-        function(args)
-          if args.bang then
-            vim.b.autoformat = not vim.b.autoformat
-
-            if vim.b.autoformat then
-              vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
-            else
-              vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
-            end
-          else
-            vim.g.autoformat = not vim.g.autoformat
-
-            if vim.g.autoformat then
-              vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
-            else
-              vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
-            end
-          end
-        end
-      '';
-      desc = "Toggle automatic formatting on save";
     };
   };
 }

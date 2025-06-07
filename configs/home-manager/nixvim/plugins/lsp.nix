@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.nixvim.plugins = {
     lsp-lines = {
@@ -10,11 +14,39 @@
     helm = {
       enable = true;
     };
+    schemastore = {
+      enable = true;
+      yaml.enable = true;
+      json.enable = false;
+    };
     lsp = {
       enable = true;
       inlayHints = true;
       servers = {
+        nixd = {
+          enable = true;
+          settings =
+            let
+              flake = ''(builtins.getFlake "github:elythh/flake)""'';
+              flakeNixvim = ''(builtins.getFlake "github:elythh/nixvim)""'';
+            in
+            {
+              nixpkgs = {
+                expr = "import ${flake}.inputs.nixpkgs { }";
+              };
+              formatting = {
+                command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+              };
+              options = {
+                nixos.expr = ''${flake}.nixosConfigurations.grovetender.options'';
+                nixvim.expr = ''${flakeNixvim}.packages.${pkgs.system}.default.options'';
+              };
+            };
+        };
         html = {
+          enable = true;
+        };
+        yamlls = {
           enable = true;
         };
         lua_ls = {
@@ -56,79 +88,61 @@
             };
           };
         };
-        yamlls = {
-          enable = true;
-          extraOptions = {
-            settings = {
-              yaml = {
-                schemas = {
-                  kubernetes = "'*.yaml";
-                  "http://json.schemastore.org/github-workflow" = ".github/workflows/*";
-                  "http://json.schemastore.org/github-action" = ".github/action.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-stable-2.9" = "roles/tasks/*.{yml,yaml}";
-                  "http://json.schemastore.org/kustomization" = "kustomization.{yml,yaml}";
-                  "http://json.schemastore.org/ansible-playbook" = "*play*.{yml,yaml}";
-                  "http://json.schemastore.org/chart" = "Chart.{yml,yaml}";
-                  "https://json.schemastore.org/dependabot-v2" = ".github/dependabot.{yml,yaml}";
-                  "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" =
-                    "*docker-compose*.{yml,yaml}";
-                  "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json" =
-                    "*flow*.{yml,yaml}";
-                };
-              };
-            };
-          };
-        };
       };
 
       keymaps = {
         silent = true;
         lspBuf = {
-          gd = {
-            action = "definition";
-            desc = "Goto Definition";
-          };
-          gr = {
-            action = "references";
-            desc = "Goto References";
-          };
-          gD = {
-            action = "declaration";
-            desc = "Goto Declaration";
-          };
-          gI = {
-            action = "implementation";
-            desc = "Goto Implementation";
-          };
-          gT = {
-            action = "type_definition";
-            desc = "Type Definition";
-          };
           K = {
             action = "hover";
-            desc = "Hover";
+            desc = "LSP: Hover";
+          };
+          "<leader>ld" = {
+            action = "definition";
+            desc = "LSP: Goto Definition";
+          };
+          "<leader>lr" = {
+            action = "references";
+            desc = "LSP: Goto References";
+          };
+          "<leader>lD" = {
+            action = "declaration";
+            desc = "LSP: Goto Declaration";
+          };
+          "<leader>li" = {
+            action = "implementation";
+            desc = "LSP: Goto Implementation";
+          };
+          "<leader>lt" = {
+            action = "type_definition";
+            desc = "LSP: Type Definition";
           };
           "<leader>lw" = {
             action = "workspace_symbol";
-            desc = "Workspace Symbol";
+            desc = "LSP: Workspace Symbol";
           };
-          "<leader>lr" = {
+          "<leader>la" = {
+            action = "code_action";
+            desc = "LSP: Action";
+          };
+          "<leader>rn" = {
             action = "rename";
-            desc = "Rename";
+            desc = "LSP: Rename";
           };
         };
+
         diagnostic = {
           J = {
             action = "open_float";
-            desc = "Line Diagnostics";
+            desc = "LSP: Line Diagnostics";
           };
           "[d" = {
             action = "goto_next";
-            desc = "Next Diagnostic";
+            desc = "LSP: Next Diagnostic";
           };
           "]d" = {
             action = "goto_prev";
-            desc = "Previous Diagnostic";
+            desc = "LSP: Previous Diagnostic";
           };
         };
       };
@@ -139,25 +153,42 @@
   ];
 
   programs.nixvim.extraConfigLua = ''
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover, {
-        border = "single"
-      }
-    )
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-      vim.lsp.handlers.signature_help, {
-        border = "single"
-      }
-    )
-
-    vim.diagnostic.config{
-      float={border="single"}
-    };
-
-    require('lspconfig.ui.windows').default_options = {
-      border = "single"
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
+    local diagnosticConf = {
+      virtual_text = false,
+      signs = {
+        active = signs,
+      },
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        focusable = true,
+        style = "minimal",
+        border = "single",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
     }
+
+    vim.diagnostic.config(diagnosticConf)
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+
+    config = function(_, opts)
+      local lspconfig = require('lspconfig')
+      for server, config in pairs(opts.servers) do
+        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+        -- `opts[server].capabilities, if you've defined it
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
+    end;
   '';
 }
