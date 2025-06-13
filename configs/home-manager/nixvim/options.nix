@@ -61,6 +61,9 @@
         linebreak = true;
         list = true;
 
+        scrolloff = 12;
+        sidescrolloff = 12;
+
         listchars = {
           nbsp = "␣";
           tab = "» ";

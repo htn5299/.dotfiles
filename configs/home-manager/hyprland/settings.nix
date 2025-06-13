@@ -84,8 +84,8 @@ in
       gaps_in = 2;
       gaps_out = 4;
       border_size = 1;
-      "col.active_border" = "0xFF${colors.base0F}";
-      "col.inactive_border" = "0xFF${colors.base00}";
+      "col.active_border" = "0x77${colors.base0F}";
+      "col.inactive_border" = "0x77${colors.base00}";
       resize_on_border = false;
     };
     decoration = {

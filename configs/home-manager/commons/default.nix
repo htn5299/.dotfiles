@@ -20,6 +20,7 @@
     krita
     xfce.ristretto
     evince
+    thunderbird
     # telegram-desktop
     # figma-linux
   ];

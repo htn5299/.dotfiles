@@ -33,6 +33,7 @@
       dressing.enable = true;
       lz-n.enable = true;
       markview.enable = true;
+      barbecue.enable = true;
     };
   };
 }

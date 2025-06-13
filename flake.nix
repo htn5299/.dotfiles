@@ -40,11 +40,6 @@
       home-manager,
       ...
     }:
-    let
-      # system should match the system you are running on
-      system = "x86_64-linux";
-      # system = "x86_64-darwin";
-    in
     {
       nixosConfigurations = {
         "pavilion" = nixpkgs.lib.nixosSystem {

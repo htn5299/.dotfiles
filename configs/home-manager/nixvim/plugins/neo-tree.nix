@@ -9,7 +9,7 @@
 
   programs.nixvim.keymaps = [
     {
-      action = "<cmd>Neotree left reveal<CR>";
+      action = "<cmd>Neotree float reveal toggle<CR>";
       key = "<leader>e";
       mode = "n";
       options = {
