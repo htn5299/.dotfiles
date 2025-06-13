@@ -22,7 +22,7 @@ in
     "$killMenu" = "killall rofi";
     "$menu" = "rofi -show-icons";
     "$mainMod" = "SUPER";
-    "$shiftMod" = "SUPER ALT";
+    "$subMod" = "SUPER ALT";
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
@@ -31,11 +31,11 @@ in
       "$mainMod, V, togglefloating,"
 
       "$mainMod, Tab, cyclenext"
-      "$shiftMod, Tab, cyclenext, prev"
+      "$subMod, Tab, cyclenext, prev"
 
-      "$shiftMod, L, exec, $killMenu || ${power-menu}/bin/power-menu-rofi"
-      "$shiftMod, H, exec, $killMenu || ${clipboard-menu}/bin/clipboard-rofi"
-      "$shiftMod, S, exec, $killMenu || ${screenshot-menu}/bin/screenshot-rofi"
+      "$subMod, L, exec, $killMenu || ${power-menu}/bin/power-menu-rofi"
+      "$subMod, H, exec, $killMenu || ${clipboard-menu}/bin/clipboard-rofi"
+      "$subMod, S, exec, $killMenu || ${screenshot-menu}/bin/screenshot-rofi"
 
       "$mainMod, T, exec, $killMenu || ${translate-menu}/bin/translate-rofi"
       "$mainMod, F, exec, $killMenu || $menu -show drun"
@@ -60,16 +60,16 @@ in
       "$mainMod, 0, workspace, 10"
 
       # Move active window to a workspace with mainMod + ALT + [0-9]
-      "$shiftMod, 1, movetoworkspace, 1"
-      "$shiftMod, 2, movetoworkspace, 2"
-      "$shiftMod, 3, movetoworkspace, 3"
-      "$shiftMod, 4, movetoworkspace, 4"
-      "$shiftMod, 5, movetoworkspace, 5"
-      "$shiftMod, 6, movetoworkspace, 6"
-      "$shiftMod, 7, movetoworkspace, 7"
-      "$shiftMod, 8, movetoworkspace, 8"
-      "$shiftMod, 9, movetoworkspace, 9"
-      "$shiftMod, 0, movetoworkspace, 10"
+      "$subMod, 1, movetoworkspace, 1"
+      "$subMod, 2, movetoworkspace, 2"
+      "$subMod, 3, movetoworkspace, 3"
+      "$subMod, 4, movetoworkspace, 4"
+      "$subMod, 5, movetoworkspace, 5"
+      "$subMod, 6, movetoworkspace, 6"
+      "$subMod, 7, movetoworkspace, 7"
+      "$subMod, 8, movetoworkspace, 8"
+      "$subMod, 9, movetoworkspace, 9"
+      "$subMod, 0, movetoworkspace, 10"
 
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
@@ -116,7 +116,7 @@ in
       "$mainMod, period, exec, ${backlight}/bin/backlight up"
       "$mainMod, minus, exec, ${volume}/bin/volume down"
       "$mainMod, equal, exec, ${volume}/bin/volume up"
-      # "$shiftMod, M, exec, volume mute"
+      # "$subMod, M, exec, volume mute"
     ];
   };
 }

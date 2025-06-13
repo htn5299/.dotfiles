@@ -92,15 +92,15 @@ in
         timeout = 1000;
       };
 
-      # volume = {
-      #   appname = "Volume";
-      #   highlight = ''#${colors.base0F}'';
-      # };
+       volume = {
+         appname = "Volume";
+         highlight = ''#${colors.base0F}'';
+       };
 
-      # backlight = {
-      #   appname = "Backlight";
-      #   highlight = ''#${colors.base0F}'';
-      # };
+       backlight = {
+         appname = "Backlight";
+         highlight = ''#${colors.base0F}'';
+       };
     };
   };
   home.file.".local/share/icons/dunst".source = ./icons;

@@ -13,7 +13,6 @@
     ../../configs/home-manager/gui
     ../../configs/home-manager/hyprland
     ../../configs/home-manager/nixvim
-    ../../configs/home-manager/xdg
 
     inputs.nixvim.homeManagerModules.nixvim
     inputs.nix-colors.homeManagerModules.default

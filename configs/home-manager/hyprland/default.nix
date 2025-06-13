@@ -10,17 +10,18 @@
     ./hypridle.nix
   ];
 
-  wayland.windowManager.hyprland.enable = true;
-  # wayland.windowManager.hyprland.plugins = [
-  #   # ... whatever
-  #   inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-  # ];
   wayland.windowManager.hyprland = {
+    # Whether to enable Hyprland wayland compositor
+    enable = true;
+    # The hyprland package to use
+    package = pkgs.hyprland;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+
+    # Optional
+    # Whether to enable hyprland-session.target on hyprland startup
+    systemd.enable = true;
     plugins = [
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      # (inputs.hyprspace.packages.${pkgs.system}.Hyprspace.overrideAttrs {
-      #   dontUseCmakeConfigure = true;
-      # })
     ];
   };
 
