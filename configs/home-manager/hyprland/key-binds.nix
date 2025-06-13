@@ -22,7 +22,7 @@ in
     "$killMenu" = "killall rofi";
     "$menu" = "rofi -show-icons";
     "$mainMod" = "SUPER";
-    "$shiftMod" = "SUPER SHIFT";
+    "$shiftMod" = "SUPER ALT";
 
     bind = [
       "$mainMod, RETURN, exec, $terminal"
