@@ -127,10 +127,5 @@
     "format": "",
     "tooltip": false,
     "on-click": "killall rofi || rofi -show-icons -show drun"
-  },
-  "mpris": {
-    "player": "spotify",
-    "tooltip": false,
-    "format": "{title} - {artist}"
   }
 }

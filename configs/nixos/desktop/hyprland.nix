@@ -1,5 +1,12 @@
+{ pkgs, ... }:
 {
-  # programs.hyprland.enable = true;
+  programs.hyprland = {
+    # Install the packages from nixpkgs
+    enable = true;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+  };
+  # ...
 
   programs.dconf = {
     enable = true;
@@ -14,4 +21,10 @@
     ];
   };
 
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+  };
+
+  security.pam.services.hyprlock = { };
 }

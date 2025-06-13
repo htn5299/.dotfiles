@@ -60,6 +60,7 @@ in
       "float,class:^(.blueman-manager-wrapped)$"
 
       "workspace 9, class:^(discord)$"
+      "workspace 9, class:^(vesktop)$"
       "workspace 10, class:^(Spotify)$"
       "workspace 10, class:^(spotify)$"
     ];

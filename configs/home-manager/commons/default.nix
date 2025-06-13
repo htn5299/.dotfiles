@@ -9,6 +9,7 @@
   ];
 
   home.packages = with pkgs; [
+    vesktop
     qbittorrent
     calibre
     bitwarden-desktop
@@ -19,12 +20,8 @@
     xfce.ristretto
     evince
     thunderbird
-    # telegram-desktop
-    # figma-linux
-    (discord.override {
-      # withOpenASAR = true; # can do this here too
-      withVencord = true;
-    })
+    telegram-desktop
+    figma-linux
   ];
 
   programs = {

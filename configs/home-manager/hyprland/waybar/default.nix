@@ -26,14 +26,13 @@ in
         include = [ "${./shared.json}" ];
         modules-left = [
           "hyprland/workspaces"
-          "hyprland/window"
         ];
 
         modules-center = [
+          "hyprland/window"
         ];
 
         modules-right = [
-          "mpris"
           "tray"
           "pulseaudio"
           "idle_inhibitor"

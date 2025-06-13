@@ -8,6 +8,4 @@
     pam.services.login.enableGnomeKeyring = true;
     pam.services.greetd.enableGnomeKeyring = true;
   };
-
-  security.pam.services.hyprlock = { };
 }

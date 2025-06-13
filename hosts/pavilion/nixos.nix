@@ -12,18 +12,16 @@
     ./hardware-configuration.nix
 
     ../../configs/nixos/core/bluetooth.nix
-    ../../configs/nixos/core/dconf.nix
     ../../configs/nixos/core/docker.nix
     ../../configs/nixos/core/keyring.nix
     ../../configs/nixos/core/network.nix
     ../../configs/nixos/core/nix.nix
     ../../configs/nixos/core/nvidia.nix
     ../../configs/nixos/core/shell.nix
-    ../../configs/nixos/core/xdg.nix
 
     ../../configs/nixos/apps/commons.nix
     ../../configs/nixos/apps/dropbox.nix
-    ../../configs/nixos/apps/flatpak.nix
+    # ../../configs/nixos/apps/flatpak.nix
     ../../configs/nixos/apps/kanata.nix
     ../../configs/nixos/apps/postgresql.nix
     ../../configs/nixos/apps/steam.nix
@@ -31,6 +29,7 @@
 
     ../../configs/nixos/desktop/fcitx5.nix
     ../../configs/nixos/desktop/fonts.nix
+    ../../configs/nixos/desktop/hyprland.nix
     ../../configs/nixos/desktop/sound.nix
   ];
   # ++ (with inputs.nixos-hardware.nixosModules; [
