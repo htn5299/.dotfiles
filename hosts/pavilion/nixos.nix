@@ -77,10 +77,10 @@
   services.xserver.enable = true;
 
   # gdm display manager
-  services.xserver.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
 
   # ly display manager
-  # services.displayManager.ly.enable = true;
+  services.displayManager.ly.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {

@@ -34,7 +34,7 @@
       size = 10000;
     };
 
-    initExtra = ''
+    initContent = ''
       # unsetopt PROMPT_SP
       # bindkey -v
       # export KEYTIMEOUT=1

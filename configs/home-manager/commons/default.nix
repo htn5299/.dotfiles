@@ -9,8 +9,6 @@
   ];
 
   home.packages = with pkgs; [
-    discord
-    # spotify
     qbittorrent
     calibre
     bitwarden-desktop
@@ -23,6 +21,10 @@
     thunderbird
     # telegram-desktop
     # figma-linux
+    (discord.override {
+      # withOpenASAR = true; # can do this here too
+      withVencord = true;
+    })
   ];
 
   programs = {
